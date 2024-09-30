@@ -15,9 +15,9 @@ class CreateCatBusinessTable extends Migration
     {
         Schema::create('cat_business', function (Blueprint $table) {
             $table->id();
-            $table->string('business_id');
+            $table->unsignedBigInteger('business_id');
+            $table->unsignedBigInteger('cat_id');
             $table->foreign('business_id')->references('id')->on('businesses');
-            $table->string('cat_id');
             $table->foreign('cat_id')->references('id')->on('business_categories');
             $table->timestamps();
         });

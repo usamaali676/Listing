@@ -15,7 +15,6 @@ class CreateBusinessesTable extends Migration
     {
         Schema::create('businesses', function (Blueprint $table) {
             $table->id();
-            $table->string('cat_id');
             $table->string('name');
             $table->text('description');
             $table->string('phone');
@@ -30,7 +29,6 @@ class CreateBusinessesTable extends Migration
             $table->string('youtube')->nullable();
             $table->string('yelp')->nullable();
             $table->boolean('status')->default('0');
-            $table->foreign('cat_id')->references('id')->on('business_categories');
             $table->timestamps();
         });
     }
