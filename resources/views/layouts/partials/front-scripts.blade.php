@@ -1,0 +1,13 @@
+        <script src="{{asset('/asset/js/jquery.min.js')}}"></script>
+		<script src="{{asset('/asset/js/popper.min.js')}}"></script>
+		<script src="{{asset('/asset/js/bootstrap.min.js')}}"></script>
+		<script src="{{asset('/asset/js/slick.js')}}"></script>
+		<script src="{{asset('/asset/js/jquery.magnific-popup.min.js')}}"></script>
+		<script src="{{asset('/asset/js/dropzone.js')}}"></script>
+		<script src="{{asset('/asset/js/counterup.js')}}"></script>
+		<script src="{{asset('/asset/js/lightbox.js')}}"></script>
+		<script src="{{asset('/asset/js/moment.min.js')}}"></script>
+		<script src="{{asset('/asset/js/daterangepicker.js')}}"></script>
+		<script src="{{asset('/asset/js/lightbox.js')}}"></script>
+		<script src="{{asset('/asset/js/jQuery.style.switcher.js')}}"></script>
+		<script src="{{asset('/asset/js/custom.js')}}"></script>
