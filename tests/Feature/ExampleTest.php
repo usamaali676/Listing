@@ -4,6 +4,8 @@ namespace Tests\Feature;
 
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
+use DatabaseMigrations;
+
 
 class ExampleTest extends TestCase
 {
