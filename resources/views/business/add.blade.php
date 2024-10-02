@@ -271,6 +271,22 @@
                                                 </div>
                                             </div>
 
+                                            @if ($user->status == 1)
+                                            <!-- Email Address -->
+                                            <div class="col-md-4">
+                                                <h5 class="gplus-input"><i class="fa fa-eyedropper" aria-hidden="true"></i> Theme Color <span>(Requierd)</span></h5>
+                                                <input type="text" placeholder="#ff0000" name="theme_color">
+                                            </div>
+                                            @endif
+
+                                            @if ($user->status == 1)
+                                            <!-- Email Address -->
+                                            <div class="col-md-12">
+                                                <h5 class="gplus-input"><i class="fa fa-video-camera" aria-hidden="true"></i> Video <span>(Optional)</span></h5>
+                                                <input type="text" placeholder="Embed Video URL" name="video_link">
+                                            </div>
+                                            @endif
+
                                         </div>
                                         <!-- Row / End -->
 
@@ -278,9 +294,6 @@
 
                                     </div>
                                     <!-- Section / End -->
-
-
-
 
                                     <!-- Section -->
                                     <div class="add-listing-section margin-top-45">

@@ -57,7 +57,7 @@ class BusinessController extends Controller
 
         return response()->json($resultHtml);
     }
-    
+
     public function index_pending()
     {
         $user = Auth::user();
@@ -153,6 +153,10 @@ class BusinessController extends Controller
         $business->meta_title = $request->meta_title;
         $business->meta_keywords = $request->meta_keywords;
         $business->meta_description = $request->meta_description;
+        $business->video_link = $request->video_link;
+        $business->theme_color = $request->theme_color;
+        $business->g_review_check = $request->g_review_check;
+        $business->g_review_slug = $request->g_review_slug;
         if($user->status == 1){
             $business->status = 1;
         }
@@ -322,7 +326,7 @@ class BusinessController extends Controller
             }
             else
             {
-               
+
                 $input['status']= 1;
             }
 
