@@ -640,6 +640,7 @@ class ComposerStaticInit0317f362ce1ed5f9774fd3c31f0c7d72
         'App\\Models\\Business' => __DIR__ . '/../..' . '/app/Models/Business.php',
         'App\\Models\\BusinessCategory' => __DIR__ . '/../..' . '/app/Models/BusinessCategory.php',
         'App\\Models\\BusinessGallery' => __DIR__ . '/../..' . '/app/Models/BusinessGallery.php',
+        'App\\Models\\LandingPage' => __DIR__ . '/../..' . '/app/Models/LandingPage.php',
         'App\\Models\\OpeningHours' => __DIR__ . '/../..' . '/app/Models/OpeningHours.php',
         'App\\Models\\Permission' => __DIR__ . '/../..' . '/app/Models/Permission.php',
         'App\\Models\\Review' => __DIR__ . '/../..' . '/app/Models/Review.php',

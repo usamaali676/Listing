@@ -8,6 +8,7 @@ use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\RoleController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\LandingPageController;
 use App\Http\Controllers\StateController;
 use App\Http\Controllers\WebsiteBusinessController;
 use App\Http\Controllers\ReviewsController;
@@ -114,6 +115,15 @@ Route::controller(RoleController::class)->prefix('role')->as('role.')->middlewar
         Route::post('/update', 'update')->name('update');
         Route::get('/delete/{id?}', 'destroy')->name('delete');
         Route::post('/ckeditor/upload', 'upload')->name('ckeditor');
+    });
+
+    Route::controller(LandingPageController::class)->prefix('landingpage')->as('landingpage.')->middleware('auth','PermissionMiddleware', 'verified')->group(function(){
+        Route::get('/index', 'index')->name('index');
+        Route::get('/create', 'create')->name('add');
+        Route::post('/store', 'store')->name('store');
+        Route::get('/edit/{id?}', 'edit')->name('edit');
+        Route::post('/update', 'update')->name('update');
+        Route::get('/delete/{id?}', 'destroy')->name('delete');
     });
 
 Route::get('/deletetag/{id?}',[BusinessController::class, 'destroytag'])->name('tag.delete');
