@@ -45,6 +45,7 @@ return array(
     'App\\Models\\Business' => $baseDir . '/app/Models/Business.php',
     'App\\Models\\BusinessCategory' => $baseDir . '/app/Models/BusinessCategory.php',
     'App\\Models\\BusinessGallery' => $baseDir . '/app/Models/BusinessGallery.php',
+    'App\\Models\\LandingPage' => $baseDir . '/app/Models/LandingPage.php',
     'App\\Models\\OpeningHours' => $baseDir . '/app/Models/OpeningHours.php',
     'App\\Models\\Permission' => $baseDir . '/app/Models/Permission.php',
     'App\\Models\\Review' => $baseDir . '/app/Models/Review.php',
