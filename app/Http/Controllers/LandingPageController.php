@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Business;
 use App\Models\LandingPage;
 use Illuminate\Http\Request;
 
@@ -25,7 +26,8 @@ class LandingPageController extends Controller
      */
     public function create()
     {
-        return view('landingPage.create');
+        $business = Business::all();
+        return view('landingPage.add', compact('business'));
     }
 
     /**
