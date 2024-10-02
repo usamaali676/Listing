@@ -33,7 +33,8 @@ class LandingPageController extends Controller
     public function create()
     {
         $business = Business::all();
-        return view('landingPage.create', compact('business'));
+        return view('landingPage.add', compact('business'));
+
     }
 
     /**

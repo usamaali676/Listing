@@ -117,7 +117,7 @@ Route::controller(RoleController::class)->prefix('role')->as('role.')->middlewar
         Route::post('/ckeditor/upload', 'upload')->name('ckeditor');
     });
 
-    Route::controller(LandingPageController::class)->prefix('landingpage')->as('landingpage.')->middleware('auth','PermissionMiddleware', 'verified')->group(function(){
+    Route::controller(LandingPageController::class)->prefix('landingpage')->as('landingpage.')->middleware('auth',  'verified')->group(function(){
         Route::get('/index', 'index')->name('index');
         Route::get('/create', 'create')->name('add');
         Route::post('/store', 'store')->name('store');
