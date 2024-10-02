@@ -46,6 +46,33 @@ class GlobalHelper
         return($file_name);
 
      }
+     public static function  fts_landpage_img($img_file,$folder_name)
+     {
+
+         $imgpath = 'landingPage/'.$folder_name;
+         File::makeDirectory($imgpath, $mode = 0777, true, true);
+         $imgDestinationPath = $imgpath.'/';
+         $file_name = time()."_".$img_file->getClientOriginalName();
+         $success = $img_file->move($imgDestinationPath, $file_name);
+         return($file_name);
+
+      }
+      public static function  delete_landpage_img($img_file,$folder_name)
+      {
+          $imgpath = 'landingPage/'.$folder_name;
+          File::makeDirectory($imgpath, $mode = 0777, true, true);
+          $imgDestinationPath = $imgpath.'/';
+          $old_image=$imgDestinationPath.$img_file;
+          if (File::exists($old_image))
+          {
+              File::delete($old_image);
+              return true;
+          }
+          else
+          {
+              return false;
+          }
+        }
 
    public static function  delete_img($img_file,$folder_name)
     {
