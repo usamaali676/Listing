@@ -25,6 +25,10 @@ class LandingPageController extends Controller
         $srno = 1;
         return view('landingPage.index', compact('landingPage', 'srno'));
     }
+    public function show()
+    {
+        return view('websitePage.index');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -46,11 +50,15 @@ class LandingPageController extends Controller
      */
     public function store(Request $request)
     {
+        // dd($request->all());
         $request->validate([
             'title' => 'required',
-            'slug' => 'required | unique:landing_pages,',
+            'slug' => 'required | unique:landing_pages,slug',
         ]);
+        $businessId = Business::where('id', $request->business_id)->pluck('lp_id')->first();
+        // dd($businessId);
         $slug = preg_replace('/\s+/', '-', $request->slug);
+        $comp_slug = $businessId.''.$slug;
         $about = $request->only('about_heading','about_description');
         $about_encoded = json_encode($about);
         $content = $request->only('content_title', 'content_description');
@@ -58,11 +66,14 @@ class LandingPageController extends Controller
         if(isset($request->logo )) {
             $logo_path = GlobalHelper::fts_upload_img($request->logo, 'logo');
         }
+        else {
+            $logo_path = "";
+        }
 
         $landingPage = LandingPage::create([
             'business_id' => $request->business_id,
             'title' => $request->title,
-            'slug' => $slug,
+            'slug' => $comp_slug,
             'meta_title' => $request->meta_title,
             'meta_keywords' => $request->meta_keyword,
             'meta_description' => $request->meta_description,
@@ -148,16 +159,9 @@ class LandingPageController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\LandingPage  $landingPage
-     * @return \Illuminate\Http\Response
-     */
-    public function show(LandingPage $landingPage)
-    {
-        //
-    }
 
-    /**
+
+
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\LandingPage  $landingPage

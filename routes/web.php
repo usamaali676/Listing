@@ -119,6 +119,7 @@ Route::controller(RoleController::class)->prefix('role')->as('role.')->middlewar
 
     Route::controller(LandingPageController::class)->prefix('landingpage')->as('landingpage.')->middleware('auth',  'verified')->group(function(){
         Route::get('/index', 'index')->name('index');
+        Route::get('/show', 'show')->name('show');
         Route::get('/create', 'create')->name('add');
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id?}', 'edit')->name('edit');
