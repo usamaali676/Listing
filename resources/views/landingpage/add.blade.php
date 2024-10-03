@@ -63,7 +63,7 @@
                         <li role="presentation">
                             <a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a>
                         </li>
-                        <li role="presentation">
+                        <li role="presentation" class="last-li">
                             <a href="#feature" aria-controls="feature" role="tab" data-toggle="tab">Features</a>
                         </li>
                     </ul>
@@ -278,6 +278,21 @@
                                                 </div>
                                                 @endfor
 
+
+                                            </div>
+                                            <div class="row with-forms">
+                                                <!-- Slug -->
+                                                @for ($i = 1 ; $i <= 3 ; $i++)
+                                                <div class="col-md-12">
+                                                    <h5>Client Name</h5>
+                                                    <input class="search-field" type="text" name="testimonial_title[]" required />
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <h5>Description</h5>
+                                                    <textarea name="editor1" id="editor1" name="testimonial_description[]" rows="5" cols="80">
+                                                    </textarea>
+                                                </div>
+                                                @endfor
 
                                             </div>
                                 </div>
