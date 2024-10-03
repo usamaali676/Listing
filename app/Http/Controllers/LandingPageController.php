@@ -25,6 +25,10 @@ class LandingPageController extends Controller
         $srno = 1;
         return view('landingPage.index', compact('landingPage', 'srno'));
     }
+    public function show()
+    {
+        return view('websitePage.index');
+    }
 
     /**
      * Show the form for creating a new resource.
@@ -155,16 +159,9 @@ class LandingPageController extends Controller
 
     /**
      * Display the specified resource.
-     *
-     * @param  \App\Models\LandingPage  $landingPage
-     * @return \Illuminate\Http\Response
-     */
-    public function show(LandingPage $landingPage)
-    {
-        //
-    }
 
-    /**
+
+
      * Show the form for editing the specified resource.
      *
      * @param  \App\Models\LandingPage  $landingPage
