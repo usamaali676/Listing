@@ -78,14 +78,15 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-doc"></i> Basic Informations</h3>
                                 </div>
+                                {{-- <input type="hidden" name="lp_id" id=""> --}}
 
                                 <!-- Title -->
                                 <div class="row with-forms">
                                     <div class="col-md-6">
                                         <h5>Business</h5>
                                         <select name="business_id" class="selectpicker chosen-select-no-single"
-                                            data-style="btn btn-success btn-round" data-live-search="true">
-                                            <option label="blank">Select Category</option>
+                                            data-style="btn btn-success btn-round" data-live-search="true" required>
+                                            <option label="blank">Select Business</option>
                                             @foreach ($business as $item)
                                             <option value="{{$item->id}}">{{ $item->name}}</option>
                                             @endforeach
@@ -94,7 +95,7 @@
 
                                     <div class="col-md-6">
                                         <h5>Title <i class="title" data-tip-content="Name of your business"></i></h5>
-                                        <input class="search-field" type="text" name="title" required />
+                                        <input class="search-field" type="text" name="title"  required />
                                     </div>
                                 </div>
 
@@ -103,13 +104,13 @@
                                     <!-- Slug -->
                                     <div class="col-md-6">
                                         <h5>Slug</h5>
-                                        <input class="search-field" type="text" name="slug" required />
+                                        <input class="search-field" type="text" name="slug"  required />
                                     </div>
                                     <!-- Logo -->
                                     <div class="col-md-6">
                                         <h5>Logo</h5>
                                         <div class="uploadButton margin-top-15 text-center">
-                                            <input type="file" name="logo" accept="image/*" id="upload" required>
+                                            <input type="file" name="logo" accept="image/*" id="upload"  >
                                         </div>
                                     </div>
                                 </div>
@@ -135,11 +136,11 @@
 
                                     <div class="col-md-6">
                                         <h5>Google Map</h5>
-                                        <input class="search-field" type="text" name="google_map" />
+                                        <input class="search-field" type="text" name="google_map" required />
                                     </div>
                                     <div class="col-md-6">
                                         <h5>Address</h5>
-                                        <input class="address" type="text" name="address" />
+                                        <input class="address" type="text" name="address" required />
                                     </div>
                                     <div class="col-md-6">
                                         <h5>Phone</h5>
@@ -198,7 +199,7 @@
                                                 <!-- Slug -->
                                                 <div class="col-md-12">
                                                     <h5>Title {{ $i }}</h5>
-                                                    <input class="search-field" type="text" name="service_title[]" required />
+                                                    <input class="search-field" type="text" name="service_title[]"   />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
@@ -233,11 +234,11 @@
                                                 <!-- Slug -->
                                                 <div class="col-md-12">
                                                     <h5>Title 1</h5>
-                                                    <input class="search-field" type="text" name="slug" required />
+                                                    <input class="search-field" type="text" name="content_title"   />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" cols="80">
+                                                    <textarea name="editor1" id="editor1" rows="5" name="content_description" cols="80">
 
                                                     </textarea>
                                                 </div>
@@ -268,7 +269,7 @@
                                                 @for ($i = 1 ; $i <= 3 ; $i++)
                                                 <div class="col-md-12">
                                                     <h5>Client Name</h5>
-                                                    <input class="search-field" type="text" name="testimonial_title[]" required />
+                                                    <input class="search-field" type="text" name="testimonial_title[]"   />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
@@ -302,15 +303,15 @@
                                                 <!-- Slug -->
                                                 <div class="col-md-6">
                                                     <h5>Heading</h5>
-                                                    <input class="search-field" type="text" name="heading" required />
+                                                    <input class="search-field" type="text" name="heading" required  />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Sub Heading</h5>
-                                                    <input class="search-field" type="text" name="subheading" required />
+                                                    <input class="search-field" type="text" name="subheading"   />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Slider Heading Color</h5>
-                                                    <input class="search-field" type="text" name="heading_color" required placeholder="#eee"/>
+                                                    <input class="search-field" type="text" name="heading_color"   placeholder="#eee"/>
                                                 </div>
 
 
@@ -331,13 +332,13 @@
                                                 <div class="col-md-6">
                                                     <h5>Desktop Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="desktop_image" accept="image/*" id="upload" required>
+                                                        <input type="file" name="desktop_image" accept="image/*" id="upload" required >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Mobile Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="mobile_image" accept="image/*" id="upload" required>
+                                                        <input type="file" name="mobile_image" accept="image/*" id="upload" required >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -403,11 +404,11 @@
                                         <!-- Slug -->
                                         <div class="col-md-12">
                                             <h5>Title 1</h5>
-                                            <input class="search-field" type="text" name="slug" required />
+                                            <input class="search-field" type="text" name="about_heading"   />
                                         </div>
                                         <div class="col-md-12">
                                             <h5>Description</h5>
-                                            <textarea name="editor1" id="editor1" rows="5" cols="80">
+                                            <textarea name="editor1" id="editor1" rows="5" name="about_description" cols="80">
                                                                         </textarea>
                                         </div>
 
@@ -439,7 +440,7 @@
                                                 <!-- Slug -->
                                                 <div class="col-md-12">
                                                     <h5>Title 1</h5>
-                                                    <input class="search-field" type="text" name="feature_title" required />
+                                                    <input class="search-field" type="text" name="feature_title"   />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>

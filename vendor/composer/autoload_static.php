@@ -617,6 +617,7 @@ class ComposerStaticInit0317f362ce1ed5f9774fd3c31f0c7d72
         'App\\Http\\Controllers\\BusinessController' => __DIR__ . '/../..' . '/app/Http/Controllers/BusinessController.php',
         'App\\Http\\Controllers\\Controller' => __DIR__ . '/../..' . '/app/Http/Controllers/Controller.php',
         'App\\Http\\Controllers\\DashboardController' => __DIR__ . '/../..' . '/app/Http/Controllers/DashboardController.php',
+        'App\\Http\\Controllers\\FeaturesLandPageController' => __DIR__ . '/../..' . '/app/Http/Controllers/FeaturesLandPageController.php',
         'App\\Http\\Controllers\\GalleryLandPageController' => __DIR__ . '/../..' . '/app/Http/Controllers/GalleryLandPageController.php',
         'App\\Http\\Controllers\\HomeController' => __DIR__ . '/../..' . '/app/Http/Controllers/HomeController.php',
         'App\\Http\\Controllers\\LandingPageController' => __DIR__ . '/../..' . '/app/Http/Controllers/LandingPageController.php',
