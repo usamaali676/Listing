@@ -22,7 +22,8 @@ class LandingPageController extends Controller
     public function index()
     {
         $landingPage = LandingPage::all();
-        return view('landingPage.index', compact('landingPage'));
+        $srno = 1;
+        return view('landingPage.index', compact('landingPage', 'srno'));
     }
 
     /**
@@ -54,7 +55,7 @@ class LandingPageController extends Controller
         $about_encoded = json_encode($about);
         $content = $request->only('content_title', 'content_description');
         $content_encoded = json_encode($content);
-        if(isset($request->logo)) {
+        if(isset($request->logo )) {
             $logo_path = GlobalHelper::fts_upload_img($request->logo, 'logo');
         }
 
@@ -63,7 +64,7 @@ class LandingPageController extends Controller
             'title' => $request->title,
             'slug' => $slug,
             'meta_title' => $request->meta_title,
-            'meta_keywords' => $request->meta_keywords,
+            'meta_keywords' => $request->meta_keyword,
             'meta_description' => $request->meta_description,
             'about_check' => $request->about_check? 1 : 0,
             'content_check' => $request->content_check? 1 : 0,
@@ -76,8 +77,8 @@ class LandingPageController extends Controller
             'logo' => $logo_path,
             'form_check' => $request->form_check? 1 : 0,
             'video_check' => $request->video_check? 1 : 0,
-            'service_check' => $request->service_check? 1 : 0,
-            'testimonial_check' => $request->testimonial_check? 1 : 0,
+            'service_check' => $request->services_check? 1 : 0,
+            'testimonial_check' => $request->testimonials_check? 1 : 0,
             'gallery_check' => $request->gallery_check? 1 : 0,
             'feature_check' => $request->feature_check? 1 : 0,
             'status' => $request->status? 1 : 0,
@@ -93,6 +94,18 @@ class LandingPageController extends Controller
                     $service['title'] = $title;
                     $service['description'] = $request->service_description[$title];
                     ServiceLandPage::create($service);
+                }
+            }
+        }
+
+        if(count($request->feature_title) > 0 && $request->feature_check == 1) {
+            // $service
+            foreach ($request->feature_title as $title) {
+                if(isset($title)) {
+                    $feature['landing_page_id'] = $landingPage_id;
+                    $feature['title'] = $title;
+                    $feature['description'] = $request->feature_description[$title];
+                    ServiceLandPage::create($feature);
                 }
             }
         }

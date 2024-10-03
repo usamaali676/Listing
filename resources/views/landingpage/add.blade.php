@@ -25,7 +25,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="{{route('business.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('landingpage.store')}}" method="POST" enctype="multipart/form-data">
             @csrf
             @if ($errors->any())
             <div class="alert alert-danger" style="color: red">
@@ -63,6 +63,9 @@
                         <li role="presentation">
                             <a href="#about" aria-controls="about" role="tab" data-toggle="tab">About</a>
                         </li>
+                        <li role="presentation">
+                            <a href="#feature" aria-controls="feature" role="tab" data-toggle="tab">Features</a>
+                        </li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -81,7 +84,7 @@
                                     <div class="col-md-6">
                                         <h5>Business</h5>
                                         <select name="business_id" class="selectpicker chosen-select-no-single"
-                                            data-style="btn btn-success btn-round" data-live-search="true" multiple>
+                                            data-style="btn btn-success btn-round" data-live-search="true">
                                             <option label="blank">Select Category</option>
                                             @foreach ($business as $item)
                                             <option value="{{$item->id}}">{{ $item->name}}</option>
@@ -91,7 +94,7 @@
 
                                     <div class="col-md-6">
                                         <h5>Title <i class="title" data-tip-content="Name of your business"></i></h5>
-                                        <input class="search-field" type="text" name="name" required />
+                                        <input class="search-field" type="text" name="title" required />
                                     </div>
                                 </div>
 
@@ -151,6 +154,14 @@
                                 <!-- Additional Options -->
                                 <div class="row with-forms">
                                     <div class="col-md-6">
+                                        <div class="heading-checkbox" ><h3>Status</h3></div>
+                                        <!-- Switcher -->
+                                        <label class="switch">
+                                            <input type="checkbox" name="status" checked>
+                                            <span class="slider round"></span>
+                                        </label>
+                                    </div>
+                                    <div class="col-md-6">
                                         <div class="heading-checkbox"><h3>Contact Form</h3></div>
                                         <!-- Switcher -->
                                         <label class="switch">
@@ -158,14 +169,8 @@
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
-                                    <div class="col-md-6">
-                                        <div class="heading-checkbox" ><h3>Video</h3></div>
-                                        <!-- Switcher -->
-                                        <label class="switch">
-                                            <input type="checkbox" name="video_check" checked>
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </div>
+
+
                                 </div>
 
                             </div>
@@ -189,48 +194,19 @@
                                 <div class="switcher-content">
                                                                     <!-- Row -->
                                             <div class="row with-forms">
+                                                @for( $i = 1; $i <=4; $i++)
                                                 <!-- Slug -->
                                                 <div class="col-md-12">
-                                                    <h5>Title 1</h5>
-                                                    <input class="search-field" type="text" name="slug" required />
+                                                    <h5>Title {{ $i }}</h5>
+                                                    <input class="search-field" type="text" name="service_title[]" required />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" cols="80">
+                                                    <textarea name="editor1" id="editor1" rows="5" name="service_description[]" cols="80">
 
                                                     </textarea>
                                                 </div>
-
-                                                <div class="col-md-12">
-                                                    <h5>Title 2</h5>
-                                                    <input class="search-field" type="text" name="slug" required />
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" cols="80">
-
-                                                    </textarea>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Title 3</h5>
-                                                    <input class="search-field" type="text" name="slug" required />
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" cols="80">
-
-                                                    </textarea>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Title 4</h5>
-                                                    <input class="search-field" type="text" name="slug" required />
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" cols="80">
-
-                                                    </textarea>
-                                                </div>
+                                                @endfor
 
                                             </div>
                                 </div>
@@ -289,33 +265,18 @@
                                                                     <!-- Row -->
                                             <div class="row with-forms">
                                                 <!-- Slug -->
+                                                @for ($i = 1 ; $i <= 3 ; $i++)
                                                 <div class="col-md-12">
                                                     <h5>Client Name</h5>
-                                                    <input class="search-field" type="text" name="slug" required />
+                                                    <input class="search-field" type="text" name="testimonial_title[]" required />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" cols="80">
+                                                    <textarea name="editor1" id="editor1" name="testimonial_description[]" rows="5" cols="80">
                                                     </textarea>
                                                 </div>
-                                                <div class="col-md-12">
-                                                    <h5>Client Name</h5>
-                                                    <input class="search-field" type="text" name="slug" required />
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" cols="80">
-                                                    </textarea>
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Client Name</h5>
-                                                    <input class="search-field" type="text" name="slug" required />
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" cols="80">
-                                                    </textarea>
-                                                </div>
+                                                @endfor
+
 
                                             </div>
                                 </div>
@@ -332,12 +293,10 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-grid"></i>Slider</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="slider_check" checked><span
-                                            class="slider round"></span></label>
+
                                 </div>
 
-                                <!-- Switcher ON-OFF Content -->
-                                <div class="switcher-content">
+
                                                                     <!-- Row -->
                                             <div class="row with-forms">
                                                 <!-- Slug -->
@@ -347,41 +306,49 @@
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Sub Heading</h5>
-                                                    <input class="search-field" type="text" name="sib-heading" required />
+                                                    <input class="search-field" type="text" name="subheading" required />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Slider Heading Color</h5>
-                                                    <input class="search-field" type="text" name="heading-color" required placeholder="#eee"/>
+                                                    <input class="search-field" type="text" name="heading_color" required placeholder="#eee"/>
                                                 </div>
 
 
-                                                <div class="col-md-6 radio-input-slider">
+                                                <div class="col-md-6 ">
                                                     <h5>Slider Text Color</h5>
-                                                   <div class="slider-radio">
-                                                   <div class="black-radio"> <input type="radio" id="black" name="black" value="black" checked= "">
-                                                    <label class="form-check-label" for="flexCheckDefault">
-                                                        Black
-                                                      </label></div>
-                                                   <div class="white-radio"> <input type="radio" id="white" name="white" value="white"><label class="form-check-label" for="flexCheckDefault">
-                                                    White
-                                                  </label></div>
+                                                   <div class="slider-radio" style="display: block">
+                                                    <label class="custom-control custom-radio" style="display: flex; gap: 10px;">
+                                                        <input class="form-check-input" type="radio" name="subheading_color" id="slider_text_color" value="1" checked="">
+                                                        <span class="custom-control-description">Black</span>
+                                                    </label>
+                                                    <label class="custom-control custom-radio" style="display: flex; gap: 10px;">
+                                                        <input class="form-check-input" type="radio" name="subheading_color" id="slider_text_color1" value="0">
+                                                        <span class="custom-control-description">White</span>
+                                                    </label>
                                                    </div>
                                                 </div>
 
-                                                <div class="col-lg-6">
+                                                <div class="col-md-6">
                                                     <h5>Desktop Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="logo" accept="image/*" id="upload" required>
+                                                        <input type="file" name="desktop_image" accept="image/*" id="upload" required>
                                                     </div>
                                                 </div>
-                                                <div class="col-lg-6">
+                                                <div class="col-md-6">
                                                     <h5>Mobile Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="logo" accept="image/*" id="upload" required>
+                                                        <input type="file" name="mobile_image" accept="image/*" id="upload" required>
                                                     </div>
                                                 </div>
+                                                <div class="col-md-6">
+                                                    <div class="heading-checkbox" ><h3>Video</h3></div>
+                                                    <!-- Switcher -->
+                                                    <label class="switch">
+                                                        <input type="checkbox" name="video_check" checked>
+                                                        <span class="slider round"></span>
+                                                    </label>
+                                                </div>
                                             </div>
-                                </div>
                                 <!-- Switcher ON-OFF Content / End -->
 
                             </div>
@@ -392,14 +359,17 @@
 
                                 <!-- Headline -->
                                 <div class="add-listing-headline">
-                                    <h3><i class="sl sl-icon-doc"></i> About</h3>
+                                    <h3><i class="sl sl-icon-doc"></i> Gallery</h3>
+                                    <label class="switch"><input type="checkbox" name="gallery_check" checked><span
+                                        class="slider round"></span></label>
                                 </div>
 
-                                <!-- Switcher ON-OFF Content -->
+                                 <!-- Switcher ON-OFF Content --><!-- Switcher ON-OFF Content -->
                                 <div class="switcher-content">
                                                                     <!-- Row -->
                                             <div class="row with-forms">
-                                                <!-- Button 1 -->
+                                                @for ($i = 1; $i <= 12; $i++)
+                                                     <!-- Button 1 -->
                                                 <div class="col-lg-4  img-gallery-div">
                                                     <label class="btn-upload" for="fileInput">
                                                         <span>Select Image</span>
@@ -407,104 +377,16 @@
                                                     <!-- Hidden File Input -->
                                                     <input type="file" id="fileInput" name="fileInput">
                                                 </div>
-                                                <!-- Button 1 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 1 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 5 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 5 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 6 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 7 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 8 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 9 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 10 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 11 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
-                                                <!-- Button 12 -->
-                                                <div class="col-lg-4 img-gallery-div">
-                                                    <label class="btn-upload" for="fileInput">
-                                                        <span>Select Image</span>
-                                                    </label>
-                                                    <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
-                                                </div>
+                                                @endfor
+
 
                                             </div>
                                 </div>
-                                <!-- Switcher ON-OFF Content / End -->
 
                             </div>
                         </div>
 
-                        <div class="tab-content">
-                            <div role="tabpanel" class="tab-pane active" id="about">
+                        <div role="tabpanel" class="tab-pane " id="about">
                                 <!-- Section -->
                                 <div class="add-listing-section">
 
@@ -520,22 +402,64 @@
                                     <div class="row with-forms">
                                         <!-- Slug -->
                                         <div class="col-md-12">
-                                                    <h5>Title 1</h5>
-                                                    <input class="search-field" type="text" name="slug" required />
+                                            <h5>Title 1</h5>
+                                            <input class="search-field" type="text" name="slug" required />
                                         </div>
                                         <div class="col-md-12">
                                             <h5>Description</h5>
                                             <textarea name="editor1" id="editor1" rows="5" cols="80">
-                                            </textarea>
-                                         </div>
+                                                                        </textarea>
+                                        </div>
+
+                                    </div>
+                                    <!-- Section / End -->
+                                </div>
+
+
+
+                        </div>
+
+                        <div role="tabpanel" class="tab-pane " id="feature">
+                                <!-- Section -->
+                                <div class="add-listing-section">
+
+                                    <!-- Headline -->
+                                    <div class="add-listing-headline">
+                                        <h3><i class="sl sl-icon-doc"></i> Features</h3>
+                                        <label class="switch"><input type="checkbox" name="feature_check" checked><span
+                                            class="slider round"></span></label>
+                                    </div>
+
+
+                                <!-- Switcher ON-OFF Content -->
+                                <div class="switcher-content">
+                                    <!-- Row -->
+                                            <div class="row with-forms">
+                                                @for ($i = 1; $i <= 4; $i++)
+                                                <!-- Slug -->
+                                                <div class="col-md-12">
+                                                    <h5>Title 1</h5>
+                                                    <input class="search-field" type="text" name="feature_title" required />
+                                                </div>
+                                                <div class="col-md-12">
+                                                    <h5>Description</h5>
+                                                    <textarea name="editor1" id="editor1" rows="5" name="feature_description" cols="80">
+
+                                                    </textarea>
+                                                </div>
+                                                @endfor
+
+
+
+                                            </div>
+                                </div>
+                                <!-- Switcher ON-OFF Content / End -->
 
                                 </div>
-                                <!-- Section / End -->
-                            </div>
 
 
 
-                    </div>
+                        </div>
                 </div>
             </div>
 
