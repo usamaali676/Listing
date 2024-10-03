@@ -27,7 +27,7 @@
     <div id="titlebar">
         <div class="row">
             <div class="col-md-12">
-                <h2>Roles</h2>
+                <h2>Blogs</h2>
                 <!-- Breadcrumbs -->
                 <nav id="breadcrumbs">
                     <a href="{{route('blog.add')}}" class="button">Add Blog</a>
