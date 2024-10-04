@@ -475,7 +475,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <h5>Description</h5>
-                                                        <textarea  class="ckeditor WYSIWYG" id="editor1" rows="5" name="feature_description[]" cols="80">
+                                                        <textarea  class="ckeditor" id="editor1" rows="5" name="feature_description[]" cols="80">
                                                             {{ $features->feature_description }}
                                                         </textarea>
                                                     </div>
