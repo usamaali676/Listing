@@ -123,14 +123,18 @@ Route::controller(RoleController::class)->prefix('role')->as('role.')->middlewar
         Route::get('/create', 'create')->name('add');
         Route::post('/store', 'store')->name('store');
         Route::get('/edit/{id?}', 'edit')->name('edit');
-        Route::post('/update', 'update')->name('update');
+        Route::post('/update/{id?}', 'update')->name('update');
         Route::get('/delete/{id?}', 'destroy')->name('delete');
+        Route::get('/logo-del',  'logo_del')->name('logo-del');
+
     });
 
 Route::get('/deletetag/{id?}',[BusinessController::class, 'destroytag'])->name('tag.delete');
 Route::get('/{slug?}', [WebsiteBusinessController::class, 'index'])->name('business.single');
 Route::post('/reviewpost', [ReviewsController::class, 'store'])->name('store.review');
 Route::get('/businesses/{business}/reviews', [ReviewsController::class, 'fetchReviews'])->name('reviews.fetch');
+
+// Landinpage Image Delte
 
 // Route::get('email/verify/{email}/{token}', 'Auth\RegisterController@verifyemail')->name('verify');
 // Route::get('/{slug?}', [WebsiteBusinessController::class, 'index'])->name('blog.single');

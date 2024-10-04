@@ -25,7 +25,7 @@
 
 <div class="row">
     <div class="col-lg-12">
-        <form action="{{route('landingpage.store')}}" method="POST" enctype="multipart/form-data">
+        <form action="{{route('landingpage.update', $land_page->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
             @if ($errors->any())
             <div class="alert alert-danger" style="color: red">
@@ -73,7 +73,7 @@
                         <div role="tabpanel" class="tab-pane active" id="home">
                             <!-- Section -->
                             <div class="add-listing-section">
-
+                                <input type="hidden" id="landingPage_id" name="landingPage_id" value="{{ $land_page->id }}">
                                 <!-- Headline -->
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-doc"></i> Basic Informations</h3>
@@ -113,9 +113,12 @@
                                     <!-- Logo -->
                                     <div class="col-md-6">
                                         <h5>Logo</h5>
-                                        <div class="uploadButton margin-top-15 text-center">
-                                            @if (isset($land_page->logo))
-                                                <img src="{{ asset('uploads/'. $land_page->logo)}}" alt="Logo" width="100%" class="img-responsive">
+                                        <div class="uploadButton margin-top-15 text-center" style="position: relative">
+                                            @if ($land_page->logo != "")
+                                            <div id="logo_input">
+                                                <img  src="{{ asset('landingpage/logo/'. $land_page->logo)}}" alt="Logo" width="180px" height="80px" class="img-responsive">
+                                                <span id="logo_del" style="position: absolute;top: 0;left: 22%;text-align: left; background: #f41b3b; padding: 10px; color: #fff; font-weight: 700; border-radius: 5px">X</span>
+                                            </div>
                                             @endif
                                             <input type="file" name="logo" accept="image/*" id="upload"  >
                                         </div>
@@ -202,20 +205,27 @@
                                 <div class="switcher-content">
                                                                     <!-- Row -->
                                             <div class="row with-forms">
-                                                @foreach ($land_page->service as $key=>$service)
+                                                @php
+                                                    $services = $land_page->service;
+                                                @endphp
+                                                @for( $i = 1; $i <=4; $i++)
+                                                <input type="hidden" name="service_ids[]" value="@if(isset($services[$i-1]->id)){{$services[$i-1]->id}}@endif">
                                                      <!-- Slug -->
                                                 <div class="col-md-12">
-                                                    <h5>Title {{ $key }}</h5>
-                                                    <input class="search-field" type="text" value="{{$service->service_title}}" name="service_title[]"   />
+                                                    <h5>Title {{ $i }}</h5>
+                                                    <input class="search-field" type="text" value="@if(isset($services[$i-1]->service_title)) {{ $services[$i-1]->service_title }} @endif" name="service_title[]"   />
 
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
                                                     <textarea class="ckeditor" id="editor1" rows="5" name="service_description[]"  cols="80">
-                                                        {{ $service->service_description }}
+                                                        @if (isset( $services[$i-1]->service_description ))
+                                                            {{ $services[$i-1]->service_description }}
+                                                        @endif
+
                                                     </textarea>
                                                 </div>
-                                                @endforeach
+                                                @endfor
 
                                             </div>
                                 </div>
@@ -275,18 +285,22 @@
                                                                     <!-- Row -->
                                             <div class="row with-forms">
                                                 <!-- Slug -->
-                                                @foreach ($land_page->testimonial as $key=>$testimonial)
+                                                @php
+                                                    $testimonial = $land_page->testimonial;
+                                                @endphp
+                                                @for ($i =1 ; $i <=3 ; $i++)
+                                                <input type="hidden" name="testimonial_ids[]" value="@if(isset($testimonial[$i-1]->id)){{$testimonial[$i-1]->id}}@endif">
                                                     <div class="col-md-12">
                                                         <h5>Client Name</h5>
-                                                        <input class="search-field" type="text" name="testimonial_title[]" value="{{ $testimonial->testimonial_title }}" />
+                                                        <input class="search-field" type="text" value="@if(isset($testimonial[$i-1]->testimonial_title)) {{ $testimonial[$i-1]->testimonial_title }} @endif" name="testimonial_title[]"   />
                                                     </div>
                                                     <div class="col-md-12">
                                                         <h5>Description</h5>
                                                         <textarea class="ckeditor" id="editor1" name="testimonial_description[]" rows="5" cols="80">
-                                                            {!! $testimonial->testimonial_description !!}
+                                                            @if(isset($testimonial[$i-1]->testimonial_description)) {{ $testimonial[$i-1]->testimonial_description }} @endif
                                                         </textarea>
                                                     </div>
-                                                @endforeach
+                                                @endfor
 
 
 
@@ -328,6 +342,7 @@
 
 
                                                                     <!-- Row -->
+                                                                    <input type="hidden" name="banner_id" value="{{ $land_page->banner->id }}" id="">
                                             <div class="row with-forms">
                                                 <!-- Slug -->
                                                 <div class="col-md-6">
@@ -361,13 +376,13 @@
                                                 <div class="col-md-6">
                                                     <h5>Desktop Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="desktop_image" accept="image/*" id="upload" required >
+                                                        <input type="file" name="desktop_image"  accept="image/*" id="upload"  >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Mobile Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="mobile_image" accept="image/*" id="upload" required >
+                                                        <input type="file" name="mobile_image" accept="image/*" id="upload"  >
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -404,7 +419,6 @@
                                                     <label class="btn-upload" for="fileInput">
                                                         <span>Select Image</span>
                                                     </label>
-                                                    <!-- Hidden File Input -->
                                                     <input type="file" id="fileInput" name="gallery_image[]">
                                                 </div>
                                                 @endfor
@@ -467,19 +481,27 @@
                                     <!-- Row -->
                                             <div class="row with-forms">
 
-                                                @foreach ($land_page->features as $key=>$features)
-                                                    <!-- Slug -->
+                                                @php
+                                                    $features = $land_page->features;
+                                                @endphp
+
+                                                @for ($i = 1; $i <= 4; $i++)
+                                                <input type="hidden" name="feature_ids[]" value="@if(isset($features[$i-1]->id)){{$features[$i-1]->id}}@endif">
+
+                                                                                                   <!-- Slug -->
                                                     <div class="col-md-12">
-                                                        <h5>Title {{ $key }}</h5>
-                                                        <input class="search-field" type="text" name="feature_title[]" value="{{ $features->feature_title }}"  />
+                                                        <h5>Title {{ $i }}</h5>
+
+                                                        <input class="search-field" type="text" name="feature_title[]" value="@if (isset($features[$i-1]->feature_title)) {{ $features[$i-1]->feature_title }} @endif"  />
                                                     </div>
                                                     <div class="col-md-12">
                                                         <h5>Description</h5>
                                                         <textarea  class="ckeditor" id="editor1" rows="5" name="feature_description[]" cols="80">
-                                                            {{ $features->feature_description }}
+                                                            @if (isset($features[$i-1]->feature_description)) {{ $features[$i-1]->feature_description }} @endif
                                                         </textarea>
                                                     </div>
-                                                @endforeach
+                                                @endfor
+
 
 
 
@@ -514,6 +536,26 @@
 <script>
     $(document).ready(function() {
        $('.ckeditor').ckeditor();
+    });
+</script>
+<script>
+    $(document).ready(function() {
+        $('#logo_del').click(function (e) {
+            e.preventDefault();
+            alert("Are you sure you want to delete!");
+            var landingPage_id = $("input[name='landingPage_id']").val();
+            $.ajax({
+                url: "{{ route('landingpage.logo-del') }}",
+                type: "GET",
+                data: {'landingPage_id': landingPage_id},
+                success: function (response) {
+                    data = response;
+                    $('#logo_input').hide();
+                    alert("Image Deleted Successfully!");
+
+                }
+            });
+        });
     });
 </script>
 @endsection

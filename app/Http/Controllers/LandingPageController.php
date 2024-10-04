@@ -70,7 +70,7 @@ class LandingPageController extends Controller
         $content = $request->only('content_title', 'content_description');
         $content_encoded = json_encode($content);
         if(isset($request->logo )) {
-            $logo_path = GlobalHelper::fts_upload_img($request->logo, 'logo');
+            $logo_path = GlobalHelper::fts_landpage_img($request->logo, 'logo');
         }
         else {
             $logo_path = "";
@@ -105,7 +105,7 @@ class LandingPageController extends Controller
 
         // dd($landingPage_id);
 
-        if(count($request->service_title) > 0 && $request->services_check == true) {
+        if(count($request->service_title) > 0 && $request->service_check == true) {
 
             foreach ($request->service_title as $key=>$title) {
                 // dd($key, $request->service_description);
@@ -130,7 +130,7 @@ class LandingPageController extends Controller
             }
         }
 
-        if($request->testimonials_check == true && count($request->testimonial_title) > 0) {
+        if($request->testimonial_check == true && count($request->testimonial_title) > 0) {
             // $testimonial
             foreach ($request->testimonial_title as $key=>$title) {
                 if(isset($title)) {
@@ -193,11 +193,178 @@ class LandingPageController extends Controller
      * @param  \App\Models\LandingPage  $landingPage
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, LandingPage $landingPage)
+    public function update(Request $request,  $id)
     {
-        //
+        $request->validate([
+            'title' => 'required',
+            'slug' => 'required | unique:landing_pages,slug,'.$id,
+        ]);
+
+        $landingPage = LandingPage::find($id);
+        $slug = preg_replace('/\s+/', '-', $request->slug);
+        $about = $request->only('about_heading','about_description');
+        $about_encoded = json_encode($about);
+        $content = $request->only('content_title', 'content_description');
+        $content_encoded = json_encode($content);
+        if(isset($request->logo)) {
+            if($landingPage->logo != "") {
+                GlobalHelper::delete_landpage_img($landingPage->logo, 'logo');
+            }
+            $logo_path = GlobalHelper::fts_landpage_img($request->logo, 'logo');
+            // dd($logo_path);
+        }
+        else {
+            $logo_path = "";
+        }
+        $landingPage->update([
+            'business_id' => $request->business_id,
+            'title' => $request->title,
+            'slug' => $slug,
+            'meta_title' => $request->meta_title,
+            'meta_keywords' => $request->meta_keyword,
+            'meta_description' => $request->meta_description,
+            'about_check' => $request->about_check? 1 : 0,
+            'content_check' => $request->content_check? 1 : 0,
+            'about_us' => $about_encoded,
+            'content' => $content_encoded,
+            'address' =>$request->address,
+            'google_map' => $request->google_map,
+            'phone' => $request->phone,
+            'email' => $request->email,
+            'logo' => $logo_path,
+            'form_check' => $request->form_check? 1 : 0,
+            'video_check' => $request->video_check? 1 : 0,
+            'service_check' => $request->service_check? 1 : 0,
+            'testimonial_check' => $request->testimonial_check? 1 : 0,
+            'gallery_check' => $request->gallery_check? 1 : 0,
+            'feature_check' => $request->feature_check? 1 : 0,
+            'status' => $request->status? 1 : 0,
+        ]);
+
+        if($request->service_check == true) {
+            // dd("fsgdg");
+            foreach ($request->service_title as $key=>$title) {
+                // dd($key, $request->service_description);
+                if(isset($title)) {
+                    $service['land_page_id'] = $landingPage->id;
+                    $service['service_title'] = $title;
+                    $service['service_description'] = $request->service_description[$key];
+                    $old_data=ServiceLandPage::where('id',$request->service_ids[$key])->get();
+                        if(isset($old_data) and sizeof($old_data)>0)
+                        {
+                            ServiceLandPage::where('id',$request->service_ids[$key])->update($service);
+                        }
+                        else
+                        {
+                            ServiceLandPage::create($service);
+                        }
+                }
+            }
+        }
+        if($request->feature_check == true ) {
+            // $service
+            foreach ($request->feature_title as $key=>$title) {
+                if(isset($title)) {
+                    $feature['land_page_id'] = $landingPage->id;
+                    $feature['feature_title'] = $title;
+                    $feature['feature_description'] = $request->feature_description[$key];
+                    $old_data=FeaturesLandPage::where('id',$request->feature_ids[$key])->get();
+                    if(isset($old_data) and sizeof($old_data)>0)
+                        {
+                            FeaturesLandPage::where('id',$request->feature_ids[$key])->update($feature);
+                        }
+                        else
+                        {
+                            FeaturesLandPage::create($feature);
+                        }
+
+                }
+            }
+        }
+
+        if($request->testimonial_check == true ) {
+            // dd("dfsdf");
+            // $testimonial
+            foreach ($request->testimonial_title as $key=>$title) {
+                if(isset($title)) {
+                    $testimonial['land_page_id'] = $landingPage->id;
+                    $testimonial['testimonial_title'] = $title;
+                    $testimonial['testimonial_description'] = $request->testimonial_description[$key];
+                    $old_data=TestimonialsLandPage::where('id',$request->testimonial_ids[$key])->get();
+                    if(isset($old_data) and sizeof($old_data)>0)
+                        {
+                            TestimonialsLandPage::where('id',$request->testimonial_ids[$key])->update($testimonial);
+                        }
+                        else
+                        {
+                            TestimonialsLandPage::create($testimonial);
+                        }
+
+                }
+            }
+        }
+
+        if(isset($request->banner_heading)){
+
+
+            $banner['heading'] = $request->banner_heading;
+            $banner['subheading'] = $request->banner_subheading;
+            $banner['heading_color'] = $request->banner_heading_color;
+            $banner['subheading_color'] = $request->banner_subheading_color;
+            if(isset($request->desktop_image)){
+            $banner['desktop_image'] = GlobalHelper::fts_landpage_img($request->desktop_image, 'desk_banner');
+            }
+            if(isset($request->mobile_image)){
+            $banner['mobile_image'] = GlobalHelper::fts_landpage_img($request->mobile_image, 'mob_banner');
+            }
+            $banner['land_page_id'] = $landingPage->id;
+            $old_data=BannerLandPage::where('id',$request->banner_id)->get();
+                if(isset($old_data) and sizeof($old_data)>0)
+                    {
+                        BannerLandPage::where('id',$request->banner_id)->update($banner);
+                    }
+                    else
+                    {
+                        BannerLandPage::create($banner);
+                    }
+        }
+        if( $request->gallery_check == true) {
+            if(isset($request->gallery_image )){
+                foreach($request->gallery_image as $image) {
+                    $gallery['land_page_id'] = $landingPage->id;
+                    if(isset($image)){
+                        $gallery['image'] = GlobalHelper::fts_landpage_img($image, 'gallery');
+                    }
+                    GalleryLandPage::create($gallery);
+                }
+            }
+        }
+
+
+
+
+        Alert::success('Success', "LandingPage Updated Successfully");
+       return redirect()->route('landingpage.index');
+       return redirect()->route('landingpage.index');
+
+
+
+
     }
 
+    public function logo_del(Request $request)
+    {
+        if($request->ajax()){
+            $landingPage = LandingPage::find($request->landingPage_id);
+            $logo = $landingPage->logo;
+            if(isset($logo)){
+                GlobalHelper::delete_landpage_img($logo, 'logo');
+                $landingPage->logo = "";
+                $landingPage->save();
+            }
+            return response()->json(['logo' => $logo]);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *
