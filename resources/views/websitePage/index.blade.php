@@ -465,7 +465,7 @@
 
                 <div class="col-md-6">
                   <label for="email-field" class="pb-2">Your Email</label>
-                  <input type="email" class="form-control" name="email" id="email-field" required="">
+                  <input type="email" class="form-control" name="email"  value="{{$land_page->email}}" id="email-field" required="">
                 </div>
 
                 <div class="col-md-12">
@@ -475,7 +475,9 @@
 
                 <div class="col-md-12">
                   <label for="message-field" class="pb-2">Message</label>
-                  <textarea class="form-control" name="message" rows="10" id="message-field" required=""></textarea>
+                  <textarea class="form-control" name="message" rows="10" id="message-field" required="">
+
+                  </textarea>
                 </div>
 
                 <div class="col-md-12 text-center">
