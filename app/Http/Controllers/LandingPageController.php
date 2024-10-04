@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Helpers\GlobalHelper;
 use App\Models\BannerLandPage;
 use App\Models\Business;
+use App\Models\FeaturesLandPage;
 use App\Models\GalleryLandPage;
 use App\Models\LandingPage;
 use App\Models\ServiceLandPage;
@@ -50,6 +51,10 @@ class LandingPageController extends Controller
      */
     public function store(Request $request)
     {
+        // if($request->services_check == true) {
+        //     dd("sdfjhsdkjf");
+        // }
+
         // dd($request->all());
         $request->validate([
             'title' => 'required',
@@ -97,63 +102,66 @@ class LandingPageController extends Controller
         ]);
         $landingPage_id = $landingPage->id ;
 
-        if(count($request->service_title) > 0 && $request->service_check == 1) {
-            // $service
-            foreach ($request->service_title as $title) {
+        // dd($landingPage_id);
+
+        if(count($request->service_title) > 0 && $request->services_check == true) {
+
+            foreach ($request->service_title as $key=>$title) {
+                // dd($key, $request->service_description);
                 if(isset($title)) {
-                    $service['landing_page_id'] = $landingPage_id;
-                    $service['title'] = $title;
-                    $service['description'] = $request->service_description[$title];
+                    $service['land_page_id'] = $landingPage_id;
+                    $service['service_title'] = $title;
+                    $service['service_description'] = $request->service_description[$key];
                     ServiceLandPage::create($service);
                 }
             }
         }
 
-        if(count($request->feature_title) > 0 && $request->feature_check == 1) {
+        if($request->feature_check == true && count($request->feature_title) > 0) {
             // $service
-            foreach ($request->feature_title as $title) {
+            foreach ($request->feature_title as $key=>$title) {
                 if(isset($title)) {
-                    $feature['landing_page_id'] = $landingPage_id;
-                    $feature['title'] = $title;
-                    $feature['description'] = $request->feature_description[$title];
-                    ServiceLandPage::create($feature);
+                    $feature['land_page_id'] = $landingPage_id;
+                    $feature['feature_title'] = $title;
+                    $feature['feature_description'] = $request->feature_description[$key];
+                    FeaturesLandPage::create($feature);
                 }
             }
         }
 
-        if(count($request->testimonial_title) > 0 && $request->testimonial_check == 1) {
+        if($request->testimonials_check == true && count($request->testimonial_title) > 0) {
             // $testimonial
-            foreach ($request->testimonial_title as $title) {
+            foreach ($request->testimonial_title as $key=>$title) {
                 if(isset($title)) {
-                    $testimonial['landing_page_id'] = $landingPage_id;
+                    $testimonial['land_page_id'] = $landingPage_id;
                     $testimonial['testimonial_title'] = $title;
-                    $testimonial['testimonial_description'] = $request->testimonial_description[$title];
+                    $testimonial['testimonial_description'] = $request->testimonial_description[$key];
                     TestimonialsLandPage::create($testimonial);
                 }
             }
         }
 
-        if(count($request->gallery_image) > 0 && $request->gallery_check == 1) {
+        if( $request->gallery_check == true && count($request->gallery_image) > 0) {
             foreach($request->gallery_image as $image) {
-                $gallery['landing_page_id'] = $landingPage_id;
+                $gallery['land_page_id'] = $landingPage_id;
                 $gallery['image'] = GlobalHelper::fts_landpage_img($image, 'gallery');
                 GalleryLandPage::create($gallery);
             }
         }
 
-       if($request->banner_check){
+       if(isset($request->banner_heading)){
             $banner['heading'] = $request->banner_heading;
             $banner['subheading'] = $request->banner_subheading;
             $banner['heading_color'] = $request->banner_heading_color;
-            $banner['subheading_color'] = $request->banner_subheading_;
+            $banner['subheading_color'] = $request->banner_subheading_color;
             $banner['desktop_image'] = GlobalHelper::fts_landpage_img($request->desktop_image, 'desk_banner');
             $banner['mobile_image'] = GlobalHelper::fts_landpage_img($request->mobile_image, 'mob_banner');
-            $banner['land_page_id'] = $request->land_page_id;
+            $banner['land_page_id'] = $landingPage_id;
             BannerLandPage::create($banner);
        }
 
        Alert::success('Success', "LandingPage Added Successfully");
-       return redirect()->route('landingPage.index');
+       return redirect()->route('landingpage.index');
 
     }
 
@@ -167,9 +175,12 @@ class LandingPageController extends Controller
      * @param  \App\Models\LandingPage  $landingPage
      * @return \Illuminate\Http\Response
      */
-    public function edit(LandingPage $landingPage)
+    public function edit($id)
     {
-        //
+       $land_page = LandingPage::find($id);
+       $business = Business::all();
+    //    dd($land_page);
+       return view('landingpage.edit', compact('land_page','business'));
     }
 
     /**
