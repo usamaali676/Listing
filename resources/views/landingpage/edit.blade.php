@@ -194,7 +194,7 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-grid"></i> Services</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="services_check" value="{{$land_page->service_check}}" checked><span
+                                    <label class="switch"><input type="checkbox" name="services_check" @if ($land_page ->services_check == true) checked  @endif ><span
                                             class="slider round"></span></label>
                                 </div>
 
@@ -206,7 +206,7 @@
                                                 <!-- Slug -->
                                                 <div class="col-md-12">
                                                     <h5>Title {{ $i }}</h5>
-                                                    <input class="search-field" type="text" value="{{$land_page->service_title}}" name="service_title[]"   />
+                                                    <input class="search-field" type="text" value="{{$land_page->service_title}}" name="service_title[]" />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
@@ -229,7 +229,7 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-card-checklist"></i> Content</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="content_check" value="{{$land_page->content_check}}" checked><span
+                                    <label class="switch"><input type="checkbox" name="content_check" @if ($land_page->content_check == true) checked @endif ><span
                                             class="slider round"></span></label>
                                 </div>
 
@@ -263,7 +263,8 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-grid"></i>Testimonials</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="testimonials_check" value="{{$land_page->testimonial_check}}" checked><span
+                                    <label class="switch"><input type="checkbox" name="testimonials_check" @if ($land_page->testimonials_check == true)
+                                    @endif checked><span
                                             class="slider round"></span></label>
                                 </div>
 
