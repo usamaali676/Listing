@@ -264,7 +264,7 @@
                                     <h3><i class="sl sl-icon-grid"></i>Testimonials</h3>
                                     <!-- Switcher -->
                                     <label class="switch"><input type="checkbox" name="testimonials_check" @if ($land_page->testimonials_check == true)
-                                    @endif checked><span
+                                        checked   @endif ><span
                                             class="slider round"></span></label>
                                 </div>
 
