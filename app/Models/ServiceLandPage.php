@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class ServiceLandPage extends Model
 {
     use HasFactory;
-    protected $fillable = [ 'service_check' , 'service_title' , 'service_description' ];
+    protected $fillable = [ 'land_page_id','service_check' , 'service_title' , 'service_description' ];
 }

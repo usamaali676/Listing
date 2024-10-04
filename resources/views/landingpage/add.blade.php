@@ -203,8 +203,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" name="service_description[]" cols="80">
-
+                                                    <textarea  id="editor1" rows="5" name="service_description[]" cols="80">
                                                     </textarea>
                                                 </div>
                                                 @endfor
@@ -238,7 +237,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" name="content_description" cols="80">
+                                                    <textarea  id="editor1" rows="5" name="content_description" cols="80">
 
                                                     </textarea>
                                                 </div>
@@ -273,28 +272,28 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" name="testimonial_description[]" rows="5" cols="80">
+                                                    <textarea  id="editor1" name="testimonial_description[]" rows="5" cols="80">
                                                     </textarea>
                                                 </div>
                                                 @endfor
 
 
                                             </div>
-                                            <div class="row with-forms">
+                                            {{-- <div class="row with-forms">
                                                 <!-- Slug -->
                                                 @for ($i = 1 ; $i <= 3 ; $i++)
                                                 <div class="col-md-12">
                                                     <h5>Client Name</h5>
-                                                    <input class="search-field" type="text" name="testimonial_title[]" required />
+                                                    <input class="search-field" type="text" name="testimonial_title[]"  />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" name="testimonial_description[]" rows="5" cols="80">
+                                                    <textarea  id="editor1" name="testimonial_description[]" rows="5" cols="80">
                                                     </textarea>
                                                 </div>
                                                 @endfor
 
-                                            </div>
+                                            </div> --}}
                                 </div>
                                 <!-- Switcher ON-OFF Content / End -->
 
@@ -318,15 +317,15 @@
                                                 <!-- Slug -->
                                                 <div class="col-md-6">
                                                     <h5>Heading</h5>
-                                                    <input class="search-field" type="text" name="heading" required  />
+                                                    <input class="search-field" type="text" name="banner_heading" required  />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Sub Heading</h5>
-                                                    <input class="search-field" type="text" name="subheading"   />
+                                                    <input class="search-field" type="text" name="banner_subheading"   />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Slider Heading Color</h5>
-                                                    <input class="search-field" type="text" name="heading_color"   placeholder="#eee"/>
+                                                    <input class="search-field" type="text" name="banner_heading_color"   placeholder="#eee"/>
                                                 </div>
 
 
@@ -334,11 +333,11 @@
                                                     <h5>Slider Text Color</h5>
                                                    <div class="slider-radio" style="display: block">
                                                     <label class="custom-control custom-radio" style="display: flex; gap: 10px;">
-                                                        <input class="form-check-input" type="radio" name="subheading_color" id="slider_text_color" value="1" checked="">
+                                                        <input class="form-check-input" type="radio" name="banner_subheading_color" id="slider_text_color" value="1" checked="">
                                                         <span class="custom-control-description">Black</span>
                                                     </label>
                                                     <label class="custom-control custom-radio" style="display: flex; gap: 10px;">
-                                                        <input class="form-check-input" type="radio" name="subheading_color" id="slider_text_color1" value="0">
+                                                        <input class="form-check-input" type="radio" name="banner_subheading_color" id="slider_text_color1" value="0">
                                                         <span class="custom-control-description">White</span>
                                                     </label>
                                                    </div>
@@ -391,7 +390,7 @@
                                                         <span>Select Image</span>
                                                     </label>
                                                     <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="fileInput">
+                                                    <input type="file" id="fileInput" name="gallery_image[]">
                                                 </div>
                                                 @endfor
 
@@ -423,7 +422,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <h5>Description</h5>
-                                            <textarea name="editor1" id="editor1" rows="5" name="about_description" cols="80">
+                                            <textarea  id="editor1" rows="5" name="about_description" cols="80">
                                                                         </textarea>
                                         </div>
 
@@ -455,11 +454,11 @@
                                                 <!-- Slug -->
                                                 <div class="col-md-12">
                                                     <h5>Title 1</h5>
-                                                    <input class="search-field" type="text" name="feature_title"   />
+                                                    <input class="search-field" type="text" name="feature_title[]"   />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea name="editor1" id="editor1" rows="5" name="feature_description" cols="80">
+                                                    <textarea  id="editor1" rows="5" name="feature_description[]" cols="80">
 
                                                     </textarea>
                                                 </div>

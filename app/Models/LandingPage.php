@@ -9,7 +9,7 @@ class LandingPage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['title','slug','meta_title','meta_keywords','meta_description','google_map','address', 'about_check','about_us', 'content_check','content','phone','email','logo','form_check','video_check'];
+    protected $fillable = ['business_id','title','slug','meta_title','meta_keywords','meta_description','google_map','address', 'about_check','about_us', 'content_check','content','phone','email','logo','form_check','video_check'];
 
     public function business() {
         return $this->belongsTo(Business::class, 'business_id');

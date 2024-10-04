@@ -8,5 +8,5 @@ use Illuminate\Database\Eloquent\Model;
 class GalleryLandPage extends Model
 {
     use HasFactory;
-    protected $fillable = ['image'];
+    protected $fillable = ['land_page_id','image'];
 }
