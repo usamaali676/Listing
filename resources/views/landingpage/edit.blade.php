@@ -130,7 +130,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <h5>Meta Keyword</h5>
-                                        <input class="search-field" type="text" name="meta_keyword" />
+                                        <input class="search-field" type="text" value="{{$land_page->meta_keywords}}" name="meta_keyword" />
                                     </div>
                                 </div>
 
@@ -138,24 +138,24 @@
                                 <div class="row with-forms">
                                     <div class="col-md-6">
                                         <h5>Meta Description</h5>
-                                        <input class="search-field" type="text" name="meta_description" />
+                                        <input class="search-field" type="text" value="{{$land_page->meta_description}}" name="meta_description" />
                                     </div>
 
                                     <div class="col-md-6">
                                         <h5>Google Map</h5>
-                                        <input class="search-field" type="text" name="google_map" required />
+                                        <input class="search-field" value="{{$land_page->google_map}}" type="text" name="google_map" required />
                                     </div>
                                     <div class="col-md-6">
                                         <h5>Address</h5>
-                                        <input class="address" type="text" name="address" required />
+                                        <input class="address" type="text" value="{{$land_page->address}}" name="address" required />
                                     </div>
                                     <div class="col-md-6">
                                         <h5>Phone</h5>
-                                        <input class="phone" type="text" name="phone" />
+                                        <input class="phone" type="text" value="{{$land_page->phone}}" name="phone" />
                                     </div>
                                     <div class="col-md-6">
                                         <h5>Email</h5>
-                                        <input class="email" type="text" name="email" />
+                                        <input class="email" type="text" value="{{$landing_page->email}}" name="email" />
                                     </div>
                                 </div>
 
@@ -165,7 +165,7 @@
                                         <div class="heading-checkbox" ><h3>Status</h3></div>
                                         <!-- Switcher -->
                                         <label class="switch">
-                                            <input type="checkbox" name="status" checked>
+                                            <input type="checkbox" name="status" value="{{$land_page->status}}" checked>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
@@ -173,7 +173,7 @@
                                         <div class="heading-checkbox"><h3>Contact Form</h3></div>
                                         <!-- Switcher -->
                                         <label class="switch">
-                                            <input type="checkbox" name="form_check" checked>
+                                            <input type="checkbox" name="form_check" value="{{$landing_page->form_check}}" checked>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
@@ -194,7 +194,7 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-grid"></i> Services</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="services_check" checked><span
+                                    <label class="switch"><input type="checkbox" name="services_check" value="{{$land_page->service_check}}" checked><span
                                             class="slider round"></span></label>
                                 </div>
 
@@ -206,11 +206,11 @@
                                                 <!-- Slug -->
                                                 <div class="col-md-12">
                                                     <h5>Title {{ $i }}</h5>
-                                                    <input class="search-field" type="text" name="service_title[]"   />
+                                                    <input class="search-field" type="text" value="{{$land_page->service_title}}" name="service_title[]"   />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea  id="editor1" rows="5" name="service_description[]" cols="80">
+                                                    <textarea  id="editor1" rows="5" name="service_description[]"  cols="80">
                                                     </textarea>
                                                 </div>
                                                 @endfor
@@ -229,7 +229,7 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-card-checklist"></i> Content</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="content_check" checked><span
+                                    <label class="switch"><input type="checkbox" name="content_check" value="{{$land_page->content_check}}" checked><span
                                             class="slider round"></span></label>
                                 </div>
 
@@ -263,7 +263,7 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-grid"></i>Testimonials</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="testimonials_check" checked><span
+                                    <label class="switch"><input type="checkbox" name="testimonials_check" value="{{$land_page->testimonial_check}}" checked><span
                                             class="slider round"></span></label>
                                 </div>
 
@@ -366,7 +366,7 @@
                                                     <div class="heading-checkbox" ><h3>Video</h3></div>
                                                     <!-- Switcher -->
                                                     <label class="switch">
-                                                        <input type="checkbox" name="video_check" checked>
+                                                        <input type="checkbox" name="video_check" value="{{$land_page->video_check}}" checked>
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
@@ -382,7 +382,7 @@
                                 <!-- Headline -->
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-doc"></i> Gallery</h3>
-                                    <label class="switch"><input type="checkbox" name="gallery_check" checked><span
+                                    <label class="switch"><input type="checkbox" name="gallery_check" value="{{$land_page->gallery_check}}" checked><span
                                         class="slider round"></span></label>
                                 </div>
 
@@ -448,7 +448,7 @@
                                     <!-- Headline -->
                                     <div class="add-listing-headline">
                                         <h3><i class="sl sl-icon-doc"></i> Features</h3>
-                                        <label class="switch"><input type="checkbox" name="feature_check" checked><span
+                                        <label class="switch"><input type="checkbox" name="feature_check" value="{{$land_page->feature_check}}" checked><span
                                             class="slider round"></span></label>
                                     </div>
 
