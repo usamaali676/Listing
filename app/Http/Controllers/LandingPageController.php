@@ -63,7 +63,7 @@ class LandingPageController extends Controller
         $businessId = Business::where('id', $request->business_id)->pluck('lp_id')->first();
         // dd($businessId);
         $slug = preg_replace('/\s+/', '-', $request->slug);
-        $comp_slug = $businessId.''.$slug;
+        $comp_slug = $businessId.'-'.$slug;
         $about = $request->only('about_heading','about_description');
         $about_encoded = json_encode($about);
         $content = $request->only('content_title', 'content_description');

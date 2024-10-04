@@ -202,18 +202,19 @@
                                 <div class="switcher-content">
                                                                     <!-- Row -->
                                             <div class="row with-forms">
-                                                @for( $i = 1; $i <=4; $i++)
-                                                <!-- Slug -->
+                                                @foreach ($land_page->service as $key=>$service)
+                                                     <!-- Slug -->
                                                 <div class="col-md-12">
-                                                    <h5>Title {{ $i }}</h5>
-                                                    <input class="search-field" type="text" value="{{$land_page->service_title}}" name="service_title[]"   />
+                                                    <h5>Title {{ $key }}</h5>
+                                                    <input class="search-field" type="text" value="{{$service->service_title}}" name="service_title[]"   />
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
                                                     <textarea  id="editor1" rows="5" name="service_description[]"  cols="80">
+                                                        {{ $service->service_description }}
                                                     </textarea>
                                                 </div>
-                                                @endfor
+                                                @endforeach
 
                                             </div>
                                 </div>
