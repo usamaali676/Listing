@@ -155,7 +155,7 @@
                                     </div>
                                     <div class="col-md-6">
                                         <h5>Email</h5>
-                                        <input class="email" type="text" value="{{$landing_page->email}}" name="email" />
+                                        <input class="email" type="text" value="{{$land_page->email}}" name="email" />
                                     </div>
                                 </div>
 
@@ -165,7 +165,7 @@
                                         <div class="heading-checkbox" ><h3>Status</h3></div>
                                         <!-- Switcher -->
                                         <label class="switch">
-                                            <input type="checkbox" name="status" value="{{$land_page->status}}" checked>
+                                            <input type="checkbox" name="status" @if ( $land_page->status == true ) checked @endif>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
@@ -173,7 +173,7 @@
                                         <div class="heading-checkbox"><h3>Contact Form</h3></div>
                                         <!-- Switcher -->
                                         <label class="switch">
-                                            <input type="checkbox" name="form_check" value="{{$landing_page->form_check}}" checked>
+                                            <input type="checkbox" name="form_check" @if($land_page->form_check == true) checked @endif>
                                             <span class="slider round"></span>
                                         </label>
                                     </div>
