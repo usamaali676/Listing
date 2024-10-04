@@ -61,7 +61,9 @@
                     @else
                         No
                     @endif</td>
-                    <td><a href="{{route('landingpage.edit')}}/{{ $item->id}}" class="button">Edit</a> <a onclick="return confirm('Are you sure you want to delete this item')"  href="{{route('landingpage.delete')}}/{{ $item->id}}" class="button">Delete</a></td>
+                    <td><a href="{{route('landingpage.edit')}}/{{ $item->id}}" class="button">Edit</a>
+                        <a href="{{route('business.single')}}/{{ $item->slug}}" class="button">View</a>
+                        <a onclick="return confirm('Are you sure you want to delete this item')"  href="{{route('landingpage.delete')}}/{{ $item->id}}" class="button">Delete</a></td>
                 </tr>
                    @endforeach
 

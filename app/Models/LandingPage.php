@@ -15,7 +15,7 @@ class LandingPage extends Model
         return $this->belongsTo(Business::class, 'business_id');
     }
     public function banner() {
-        return $this->hasMany(BannerLandPage::class, 'land_page_id');
+        return $this->hasOne(BannerLandPage::class, 'land_page_id');
     }
     public function service() {
         return $this->hasMany(ServiceLandPage::class, 'land_page_id');

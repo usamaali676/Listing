@@ -26,8 +26,9 @@ class LandingPageController extends Controller
         $srno = 1;
         return view('landingPage.index', compact('landingPage', 'srno'));
     }
-    public function show()
+    public function show($slug)
     {
+        $land_page = LandingPage::where('slug', $slug)->first();
         return view('websitePage.index');
     }
 
@@ -93,8 +94,8 @@ class LandingPageController extends Controller
             'logo' => $logo_path,
             'form_check' => $request->form_check? 1 : 0,
             'video_check' => $request->video_check? 1 : 0,
-            'service_check' => $request->services_check? 1 : 0,
-            'testimonial_check' => $request->testimonials_check? 1 : 0,
+            'service_check' => $request->service_check? 1 : 0,
+            'testimonial_check' => $request->testimonial_check? 1 : 0,
             'gallery_check' => $request->gallery_check? 1 : 0,
             'feature_check' => $request->feature_check? 1 : 0,
             'status' => $request->status? 1 : 0,

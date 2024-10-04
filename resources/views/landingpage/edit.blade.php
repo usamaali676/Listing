@@ -194,7 +194,7 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-grid"></i> Services</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="services_check" @if ($land_page ->services_check == true) checked  @endif ><span
+                                    <label class="switch"><input type="checkbox" name="service_check" @if ($land_page->service_check == true) checked  @endif ><span
                                             class="slider round"></span></label>
                                 </div>
 
@@ -265,7 +265,7 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-grid"></i>Testimonials</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="testimonials_check" @if ($land_page->testimonials_check == true)
+                                    <label class="switch"><input type="checkbox" name="testimonial_check" @if ($land_page->testimonial_check == true)
                                         checked   @endif ><span
                                             class="slider round"></span></label>
                                 </div>
@@ -275,17 +275,20 @@
                                                                     <!-- Row -->
                                             <div class="row with-forms">
                                                 <!-- Slug -->
-                                                @for ($i = 1 ; $i <= 3 ; $i++)
-                                                <div class="col-md-12">
-                                                    <h5>Client Name</h5>
-                                                    <input class="search-field" type="text" name="testimonial_title[]"   />
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Description</h5>
-                                                    <textarea  id="editor1" name="testimonial_description[]" rows="5" cols="80">
-                                                    </textarea>
-                                                </div>
-                                                @endfor
+                                                @foreach ($land_page->testimonial as $key=>$testimonial)
+                                                    <div class="col-md-12">
+                                                        <h5>Client Name</h5>
+                                                        <input class="search-field" type="text" name="testimonial_title[]" value="{{ $testimonial->testimonial_title }}" />
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h5>Description</h5>
+                                                        <textarea  id="editor1" name="testimonial_description[]" rows="5" cols="80">
+                                                            {!! $testimonial->testimonial_description !!}
+                                                        </textarea>
+                                                    </div>
+                                                @endforeach
+
+
 
 
                                             </div>
@@ -322,20 +325,22 @@
                                 </div>
 
 
+
+
                                                                     <!-- Row -->
                                             <div class="row with-forms">
                                                 <!-- Slug -->
                                                 <div class="col-md-6">
                                                     <h5>Heading</h5>
-                                                    <input class="search-field" type="text" name="banner_heading" required  />
+                                                    <input class="search-field" type="text" name="banner_heading" value="{{ $land_page->banner->heading }}" required  />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Sub Heading</h5>
-                                                    <input class="search-field" type="text" name="banner_subheading"   />
+                                                    <input class="search-field" type="text" name="banner_subheading" value="{{ $land_page->banner->subheading }}"  />
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Slider Heading Color</h5>
-                                                    <input class="search-field" type="text" name="banner_heading_color"   placeholder="#eee"/>
+                                                    <input class="search-field" type="text" name="banner_heading_color" value="{{ $land_page->banner->heading_color }}"  placeholder="#eee"/>
                                                 </div>
 
 
@@ -343,11 +348,11 @@
                                                     <h5>Slider Text Color</h5>
                                                    <div class="slider-radio" style="display: block">
                                                     <label class="custom-control custom-radio" style="display: flex; gap: 10px;">
-                                                        <input class="form-check-input" type="radio" name="banner_subheading_color" id="slider_text_color" value="1" checked="">
+                                                        <input class="form-check-input" type="radio" name="banner_subheading_color" id="slider_text_color" value="1" @if ($land_page->banner->subheading_color == 1) checked @endif>
                                                         <span class="custom-control-description">Black</span>
                                                     </label>
                                                     <label class="custom-control custom-radio" style="display: flex; gap: 10px;">
-                                                        <input class="form-check-input" type="radio" name="banner_subheading_color" id="slider_text_color1" value="0">
+                                                        <input class="form-check-input" type="radio" name="banner_subheading_color" id="slider_text_color1" value="0"  @if ($land_page->banner->subheading_color == 0) checked @endif>
                                                         <span class="custom-control-description">White</span>
                                                     </label>
                                                    </div>
