@@ -366,7 +366,7 @@
                                                     <div class="heading-checkbox" ><h3>Video</h3></div>
                                                     <!-- Switcher -->
                                                     <label class="switch">
-                                                        <input type="checkbox" name="video_check" checked>
+                                                        <input type="checkbox" name="video_check" value="{{$land_page->video_check}}" checked>
                                                         <span class="slider round"></span>
                                                     </label>
                                                 </div>
@@ -382,7 +382,7 @@
                                 <!-- Headline -->
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-doc"></i> Gallery</h3>
-                                    <label class="switch"><input type="checkbox" name="gallery_check" checked><span
+                                    <label class="switch"><input type="checkbox" name="gallery_check" value="{{$land_page->gallery_check}}" checked><span
                                         class="slider round"></span></label>
                                 </div>
 
@@ -448,7 +448,7 @@
                                     <!-- Headline -->
                                     <div class="add-listing-headline">
                                         <h3><i class="sl sl-icon-doc"></i> Features</h3>
-                                        <label class="switch"><input type="checkbox" name="feature_check" checked><span
+                                        <label class="switch"><input type="checkbox" name="feature_check" value="{{$land_page->feature_check}}" checked><span
                                             class="slider round"></span></label>
                                     </div>
 
