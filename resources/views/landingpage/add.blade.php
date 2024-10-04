@@ -203,7 +203,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea  id="editor1" rows="5" name="service_description[]" cols="80">
+                                                    <textarea class="ckeditor" id="editor1" rows="5" name="service_description[]" cols="80">
                                                     </textarea>
                                                 </div>
                                                 @endfor
@@ -237,7 +237,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea  id="editor1" rows="5" name="content_description" cols="80">
+                                                    <textarea class="ckeditor" id="editor1" rows="5" name="content_description" cols="80">
 
                                                     </textarea>
                                                 </div>
@@ -272,7 +272,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea  id="editor1" name="testimonial_description[]" rows="5" cols="80">
+                                                    <textarea class="ckeditor" id="editor1" name="testimonial_description[]" rows="5" cols="80">
                                                     </textarea>
                                                 </div>
                                                 @endfor
@@ -422,7 +422,7 @@
                                         </div>
                                         <div class="col-md-12">
                                             <h5>Description</h5>
-                                            <textarea  id="editor1" rows="5" name="about_description" cols="80">
+                                            <textarea class="ckeditor" id="editor1" rows="5" name="about_description" cols="80">
                                                                         </textarea>
                                         </div>
 
@@ -458,7 +458,7 @@
                                                 </div>
                                                 <div class="col-md-12">
                                                     <h5>Description</h5>
-                                                    <textarea  id="editor1" rows="5" name="feature_description[]" cols="80">
+                                                    <textarea class="ckeditor" id="editor1" rows="5" name="feature_description[]" cols="80">
 
                                                     </textarea>
                                                 </div>
