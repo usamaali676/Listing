@@ -24,7 +24,7 @@ class LandingPage extends Model
         return $this->hasMany(TestimonialsLandPage::class, 'land_page_id');
     }
     public function features() {
-        return $this->hasMany('FeaturesLandPage', 'land_page_id');
+        return $this->hasMany(FeaturesLandPage::class, 'land_page_id');
     }
     public function gallery() {
         return $this->hasMany(GalleryLandPage::class, 'land_page_id');

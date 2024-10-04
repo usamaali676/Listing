@@ -189,7 +189,7 @@
 
 @endsection
 @section('js')
-<script src="//cdn.ckeditor.com/4.14.0/standard/ckeditor.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.9.0/ckeditor.js" integrity="sha512-x9cTrtvYtEBMlCpiMPiN66HsNQ0Rf2l9eeFeExYmOWdPFjPrT5a9UPdLTZ+tdxtmE5eeKIril3xXFJGSYKXTYA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 <script>
     $(document).ready(function() {
        $('.ckeditor').ckeditor();

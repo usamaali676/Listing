@@ -466,19 +466,22 @@
                                 <div class="switcher-content">
                                     <!-- Row -->
                                             <div class="row with-forms">
-                                                @for ($i = 1; $i <= 4; $i++)
-                                                <!-- Slug -->
-                                                <div class="col-md-12">
-                                                    <h5>Title 1</h5>
-                                                    <input class="search-field" type="text" name="feature_title[]"   />
-                                                </div>
-                                                <div class="col-md-12">
-                                                    <h5>Description</h5>
-                                                    <textarea  id="editor1" rows="5" name="feature_description[]" cols="80">
 
-                                                    </textarea>
-                                                </div>
-                                                @endfor
+                                                @foreach ($land_page->features as $key=>$features)
+                                                    <!-- Slug -->
+                                                    <div class="col-md-12">
+                                                        <h5>Title {{ $key }}</h5>
+                                                        <input class="search-field" type="text" name="feature_title[]" value="{{ $features->feature_title }}"  />
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <h5>Description</h5>
+                                                        <textarea  class="ckeditor WYSIWYG" id="editor1" rows="5" name="feature_description[]" cols="80">
+                                                            {{ $features->feature_description }}
+                                                        </textarea>
+                                                    </div>
+                                                @endforeach
+
+
 
 
 
@@ -507,4 +510,12 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
     integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous">
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/ckeditor/4.9.0/ckeditor.js" integrity="sha512-x9cTrtvYtEBMlCpiMPiN66HsNQ0Rf2l9eeFeExYmOWdPFjPrT5a9UPdLTZ+tdxtmE5eeKIril3xXFJGSYKXTYA==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+<script>
+    $(document).ready(function() {
+       $('.ckeditor').ckeditor();
+    });
+</script>
 @endsection
+
+
