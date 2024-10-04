@@ -179,8 +179,10 @@ class LandingPageController extends Controller
     {
        $land_page = LandingPage::find($id);
        $business = Business::all();
+       $about = json_decode($land_page->about_us);
+       $content = json_decode($land_page->content);
     //    dd($land_page);
-       return view('landingpage.edit', compact('land_page','business'));
+       return view('landingpage.edit', compact('land_page','business', 'about','content'));
     }
 
     /**
