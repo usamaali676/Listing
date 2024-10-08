@@ -116,11 +116,14 @@
                                         <div class="uploadButton margin-top-15 text-center" style="position: relative">
                                             @if ($land_page->logo != "")
                                             <div id="logo_input">
-                                                <img  src="{{ asset('landingpage/logo/'. $land_page->logo)}}" alt="Logo" width="180px" height="80px" class="img-responsive">
-                                                <span id="logo_del" style="position: absolute;top: 0;left: 22%;text-align: left; background: #f41b3b; padding: 10px; color: #fff; font-weight: 700; border-radius: 5px">X</span>
+                                                <img  src="{{ asset('landingpage/logo/'. $land_page->logo)}}" id="output" alt="Logo" width="180px" height="80px" class="img-responsive">
+                                                <span id="logo_del" style="position: absolute;top: 0;left: 22%;text-align: left; background: #f41b3b; padding: 10px; color: #fff; font-weight: 700; border-radius: 5px; cursor: pointer">X</span>
                                             </div>
+                                            @else
+                                                <img  src="" id="output" style="display: none" alt="Logo" width="180px" height="80px" class="img-responsive">
                                             @endif
-                                            <input type="file" name="logo" accept="image/*" id="upload"  >
+
+                                            <input type="file" name="logo" accept="image/*" id="upload"  onchange="loadFile(event)">
                                         </div>
                                     </div>
                                 </div>
@@ -376,13 +379,31 @@
                                                 <div class="col-md-6">
                                                     <h5>Desktop Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="desktop_image"  accept="image/*" id="upload"  >
+                                                        <div style="position: relative">
+                                                            @if ($land_page->banner->desktop_image)
+                                                            <img  src="{{ asset('landingpage/desk_banner/'.  $land_page->banner->desktop_image ) }}"  id="banner"  width="180px" height="80px" class="img-responsive">
+                                                            <span id="banner_del" style="position: absolute;top: 0;left: 22%;text-align: left; background: #f41b3b; padding: 10px; color: #fff; font-weight: 700; border-radius: 5px; cursor: pointer">X</span>
+                                                            @else
+                                                                <img  src=""  id="banner" style="display: none"  width="180px" height="80px" class="img-responsive">
+                                                            @endif
+
+                                                        </div>
+                                                        <input type="file" name="desktop_image"  accept="image/*" id="upload"  onchange="banner_desk(event)">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Mobile Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="mobile_image" accept="image/*" id="upload"  >
+                                                        <div style="position: relative">
+                                                            @if ($land_page->banner->mobile_image)
+                                                            <img  src="{{ asset('landingpage/mob_banner/'.  $land_page->banner->mobile_image ) }}"  id="mob_banner"  width="180px" height="80px" class="img-responsive">
+                                                            <span id="mob_banner_del" style="position: absolute;top: 0;left: 22%;text-align: left; background: #f41b3b; padding: 10px; color: #fff; font-weight: 700; border-radius: 5px; cursor: pointer">X</span>
+                                                            @else
+                                                                <img  src=""  id="mob_banner" style="display: none"  width="180px" height="80px" class="img-responsive">
+                                                            @endif
+
+                                                        </div>
+                                                        <input type="file" name="mobile_image" accept="image/*" id="upload"onchange="banner_mob(event)">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -412,9 +433,14 @@
                                  <!-- Switcher ON-OFF Content --><!-- Switcher ON-OFF Content -->
                                 <div class="switcher-content">
                                                                     <!-- Row -->
+                                            @php
+                                            $gallery = $land_page->gallery;
+                                            @endphp
                                             <div class="row with-forms">
                                                 @for ($i = 1; $i <= 12; $i++)
                                                      <!-- Button 1 -->
+                                                     {{-- <img src="{{ asset('landingpage/gallery/' . $gallery->image ) }}"  id="gallery_{{ $i }}" width="180px" height="80px" class="img-responsive"> --}}
+
                                                 <div class="col-lg-4  img-gallery-div">
                                                     <label class="btn-upload" for="fileInput">
                                                         <span>Select Image</span>
@@ -542,15 +568,27 @@
     $(document).ready(function() {
         $('#logo_del').click(function (e) {
             e.preventDefault();
-            alert("Are you sure you want to delete!");
-            var landingPage_id = $("input[name='landingPage_id']").val();
+
+            // Show a confirmation dialog
+            if (confirm("Are you sure you want to delete?")) {
+                // User clicked "OK"
+                var landingPage_id = $("input[name='landingPage_id']").val();
+                // Proceed with deletion logic, e.g., making an AJAX call
+                console.log("Deleting landing page with ID:", landingPage_id);
+                // Add your deletion logic here
+            } else {
+                // User clicked "Cancel"
+                console.log("Deletion canceled");
+            }
+
             $.ajax({
                 url: "{{ route('landingpage.logo-del') }}",
                 type: "GET",
                 data: {'landingPage_id': landingPage_id},
                 success: function (response) {
                     data = response;
-                    $('#logo_input').hide();
+                    $('#output').hide();
+                    $('#logo_del').hide();
                     alert("Image Deleted Successfully!");
 
                 }
@@ -558,6 +596,130 @@
         });
     });
 </script>
+<script type="text/javascript">
+    var loadFile = function(event) {
+        // alert("File Loading Success");
+        var output = document.getElementById('output');
+        // alert(output.src);
+        var button = document.getElementById('logo_del');
+        if(button){
+        button.style = 'display:none;';
+        }
+        if(output){
+        output.src = '';
+        }
+        if(output.src){
+            output.style = 'display:block;';
+        }
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+          URL.revokeObjectURL(output.src) // free memory
+        }
+      };
+    </script>
+
+<script type="text/javascript">
+    var banner_desk = function(event) {
+        var output = document.getElementById('banner');
+        var button = document.getElementById('banner_del');
+        if(button){
+        button.style = 'display:none;';
+        }
+        if(output){
+        output.src = '';
+        }
+        if(output.src){
+            output.style = 'display:block;';
+        }
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+          URL.revokeObjectURL(output.src) // free memory
+        }
+      };
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#banner_del').click(function (e) {
+                e.preventDefault();
+
+                // Show a confirmation dialog
+                if (confirm("Are you sure you want to delete?")) {
+                    // User clicked "OK"
+                    var landingPage_id = $("input[name='landingPage_id']").val();
+                    // Proceed with deletion logic, e.g., making an AJAX call
+                    console.log("Deleting landing page with ID:", landingPage_id);
+                    // Add your deletion logic here
+                } else {
+                    // User clicked "Cancel"
+                    console.log("Deletion canceled");
+                }
+
+                $.ajax({
+                    url: "{{ route('landingpage.deletebanner') }}",
+                    type: "GET",
+                    data: {'landingPage_id': landingPage_id},
+                    success: function (response) {
+                        data = response;
+                        $('#banner').hide();
+                        $('#banner_del').hide();
+                        alert("Image Deleted Successfully!");
+
+                    }
+                });
+            });
+        });
+    </script>
+<script type="text/javascript">
+    var banner_mob = function(event) {
+        var output = document.getElementById('mob_banner');
+        var button = document.getElementById('mob_banner_del');
+        if(button){
+        button.style = 'display:none;';
+        }
+        if(output){
+        output.src = '';
+        }
+        if(output.src){
+            output.style = 'display:block;';
+        }
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+          URL.revokeObjectURL(output.src) // free memory
+        }
+      };
+    </script>
+    <script>
+        $(document).ready(function() {
+            $('#mob_banner_del').click(function (e) {
+                e.preventDefault();
+
+                // Show a confirmation dialog
+                if (confirm("Are you sure you want to delete?")) {
+                    // User clicked "OK"
+                    var landingPage_id = $("input[name='landingPage_id']").val();
+                    // Proceed with deletion logic, e.g., making an AJAX call
+                    console.log("Deleting landing page with ID:", landingPage_id);
+                    // Add your deletion logic here
+                } else {
+                    // User clicked "Cancel"
+                    console.log("Deletion canceled");
+                }
+
+                $.ajax({
+                    url: "{{ route('landingpage.bannermob') }}",
+                    type: "GET",
+                    data: {'landingPage_id': landingPage_id},
+                    success: function (response) {
+                        data = response;
+                        $('#mob_banner').hide();
+                        $('#mob_banner_del').hide();
+                        alert("Image Deleted Successfully!");
+
+                    }
+                });
+            });
+        });
+    </script>
 @endsection
 
 

@@ -122,7 +122,19 @@
 					</ul>
 				</li>
                 @endif
-
+                {{-- @if ($perm_blog->create == 1 || $perm_blog->view == 1) --}}
+                <li><a><i class="im im-icon-File-HorizontalText"></i>Landing Page</a>
+					<ul>
+                        {{-- @if ($perm_blog->view == 1) --}}
+						<li><a href="{{route('landingpage.index')}}">View Landing Page</a></li>
+                        {{-- @endif --}}
+                        {{-- @if ($perm_blog->create == 1) --}}
+						<li><a href="{{route('landingpage.add')}}">Add Landing Page</a></li>
+                        {{-- @endif --}}
+						{{-- <li><a href="dashboard-my-listings.html">Expired <span class="nav-tag red">2</span></a></li> --}}
+					</ul>
+				</li>
+                {{-- @endif --}}
 			</ul>
 
 

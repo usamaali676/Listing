@@ -365,6 +365,32 @@ class LandingPageController extends Controller
             return response()->json(['logo' => $logo]);
         }
     }
+    public function deletebanner(Request $request)
+    {
+        if($request->ajax()){
+            $landingPage = LandingPage::find($request->landingPage_id);
+            $banner = BannerLandPage::where('land_page_id' , $landingPage->id)->first();
+            if(isset($banner)){
+                GlobalHelper::delete_landpage_img($banner->desktop_image, 'desk_banner');
+                $banner->desktop_image = "";
+                $banner->save();
+            }
+            return response()->json(['banner' => $banner]);
+        }
+    }
+    public function bannermob(Request $request)
+    {
+        if($request->ajax()){
+            $landingPage = LandingPage::find($request->landingPage_id);
+            $banner = BannerLandPage::where('land_page_id' , $landingPage->id)->first();
+            if(isset($banner)){
+                GlobalHelper::delete_landpage_img($banner->mobile_image, 'mob_banner');
+                $banner->mobile_image = "";
+                $banner->save();
+            }
+            return response()->json(['banner' => $banner]);
+        }
+    }
     /**
      * Remove the specified resource from storage.
      *

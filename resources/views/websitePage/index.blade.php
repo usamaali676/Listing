@@ -36,6 +36,12 @@
   ======================================================== -->
   <!-- Include Glightbox CSS -->
 
+  <style>
+    :root{
+        --accent-color
+    }
+  </style>
+
 </head>
 
 <body class="index-page">

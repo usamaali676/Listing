@@ -98,8 +98,9 @@ input.input-check{
     display: inline-block;
     background-color: #F91942; /* Customize button color */
     color: white;
-    padding: 10px 20px;
+    padding: 10px 60px;
     border-radius: 5px;
+    margin: 10px 0;
     border: none;
     cursor: pointer;
     text-align: center;
@@ -122,8 +123,12 @@ input.input-check{
 }
 .img-gallery-div{
     display: flex;
+    /* margin: auto; */
     justify-content: center;
     margin: 40px 0px;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
 }
 /* addistion css */
 .presentation{

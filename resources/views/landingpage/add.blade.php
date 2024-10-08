@@ -110,7 +110,9 @@
                                     <div class="col-md-6">
                                         <h5>Logo</h5>
                                         <div class="uploadButton margin-top-15 text-center">
-                                            <input type="file" name="logo" accept="image/*" id="upload"  >
+                                            <img  src="" style="display: none" id="logo"  width="180px" height="80px" class="img-responsive">
+
+                                            <input type="file" name="logo" accept="image/*" id="upload"  onchange="loadFile(event)">
                                         </div>
                                     </div>
                                 </div>
@@ -346,13 +348,15 @@
                                                 <div class="col-md-6">
                                                     <h5>Desktop Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="desktop_image" accept="image/*" id="upload" required >
+                                                        <img  src="" style="display: none" id="banner"  width="180px" height="80px" class="img-responsive">
+                                                        <input type="file" name="desktop_image" accept="image/*" id="upload" required onchange="banner_desk(event)">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <h5>Mobile Banner</h5>
                                                     <div class="">
-                                                        <input type="file" name="mobile_image" accept="image/*" id="upload" required >
+                                                        <img  src="" style="display: none" id="ban_mobile"  width="180px" height="80px" class="img-responsive">
+                                                        <input type="file" name="mobile_image" accept="image/*" id="upload" required onchange="banner_mobile(event)">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
@@ -382,7 +386,7 @@
                                  <!-- Switcher ON-OFF Content --><!-- Switcher ON-OFF Content -->
                                 <div class="switcher-content">
                                                                     <!-- Row -->
-                                            <div class="row with-forms">
+                                            {{-- <div class="row with-forms">
                                                 @for ($i = 1; $i <= 12; $i++)
                                                      <!-- Button 1 -->
                                                 <div class="col-lg-4  img-gallery-div">
@@ -390,11 +394,29 @@
                                                         <span>Select Image</span>
                                                     </label>
                                                     <!-- Hidden File Input -->
-                                                    <input type="file" id="fileInput" name="gallery_image[]">
+                                                    <img  src="" style="display: none" id="gallery_{{ $i }}"  width="180px" height="80px" class="img-responsive">
+
+                                                    <input type="file" id="fileInput" name="gallery_image[]" onchange="gallery(event, {{ $i }})">
                                                 </div>
                                                 @endfor
 
 
+                                            </div> --}}
+                                            <div class="row with-forms">
+                                                @for ($i = 1; $i <= 12; $i++)
+                                                    <!-- Button -->
+                                                    <div class="col-lg-4 img-gallery-div">
+                                                        <img src="" style="display: none" id="gallery_{{ $i }}" width="180px" height="80px" class="img-responsive">
+
+                                                        <label class="btn-upload" for="fileInput_{{ $i }}">
+                                                            <span>Select Image</span>
+                                                        </label>
+                                                        <!-- Hidden File Input -->
+
+                                                        <!-- Unique File Input -->
+                                                        <input type="file" id="fileInput_{{ $i }}" name="gallery_image[]" onchange="gallery(event, {{ $i }})" style="display: none;">
+                                                    </div>
+                                                @endfor
                                             </div>
                                 </div>
 
@@ -497,4 +519,68 @@
        $('.ckeditor').ckeditor();
     });
 </script>
+<script type="text/javascript">
+    var loadFile = function(event) {
+        var output = document.getElementById('logo');
+        output.style = '';
+        output.src = URL.createObjectURL(event.target.files[0]);
+        output.onload = function() {
+          URL.revokeObjectURL(output.src) // free memory
+        }
+      };
+    </script>
+    <script type="text/javascript">
+        var banner_desk = function(event) {
+            var output = document.getElementById('banner');
+            output.style = '';
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+              URL.revokeObjectURL(output.src) // free memory
+            }
+          };
+        </script>
+    <script type="text/javascript">
+        var banner_mobile = function(event) {
+            var output = document.getElementById('ban_mobile');
+            output.style = '';
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+              URL.revokeObjectURL(output.src) // free memory
+            }
+          };
+        </script>
+
+<script type="text/javascript">
+    var gallery = function(event, index) {
+        var output = document.querySelector('#gallery_' + index);
+
+        if (output) {
+            output.style.display = 'block'; // Show the image
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src); // Free memory
+            };
+        } else {
+            console.error('Element not found with id: gallery_' + index);
+        }
+    };
+</script>
+
+
+{{-- <script type="text/javascript">
+    var gallery = function(event, index) {
+        var output = document.querySelector('#gallery_' + index);
+
+        if (output) {
+            output.style.display = ''; // Show the image
+            output.src = URL.createObjectURL(event.target.files[0]);
+            output.onload = function() {
+                URL.revokeObjectURL(output.src); // Free memory
+            };
+        } else {
+            console.error('Element not found with id: gallery_' + index);
+        }
+    };
+</script> --}}
+
 @endsection
