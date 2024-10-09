@@ -35,6 +35,7 @@ class WebsiteBusinessController extends Controller
         }
         else {
             $land_page = LandingPage::where('slug', $slug)->first();
+            dd( $land_page->banner);
             // dd($land_page);
             $about = json_decode($land_page->about_us);
             $content = json_decode($land_page->content);

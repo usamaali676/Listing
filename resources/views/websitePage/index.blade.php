@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Hardwood Flooring Installation</title>
-  <meta name="description" content="">
-  <meta name="keywords" content="">
+  <title>{{$land_page->title}}</title>
+  <meta name="description" content="{{$land_page->meta_desciption}}">
+  <meta name="keywords" content="{{$land_page->meta_keywords}}">
 
   <!-- Favicons -->
   <link href="assets/img/favicon.png" rel="icon">
@@ -46,7 +46,7 @@
       <a href="index.html" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Dalton Flooring</h1>
+        <img class="sitename" src="{{asset('business/logo', $land_page->business->logo)}}">
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -72,7 +72,7 @@
       <img src="imges/backgorund.webp" width="100%" alt="" data-aos="fade-in">
 
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
-        <h2>Hardwood Flooring Installation in Atlanta, GA</h2>
+        <h1>{{$land_page->banner->heading}}</h1>
         <p>Dalton Flooring Gallery</p>
         <a href="#about" class="btn-scroll" title="Scroll Down"><i class="bi bi-chevron-down"></i></a>
       </div>
@@ -87,7 +87,7 @@
         <div class="row gy-5">
 
           <div class="content col-xl-5 d-flex flex-column" data-aos="fade-up" data-aos-delay="100">
-            <h3>Dalton Flooring Gallery</h3>
+            <h3>{{ $land_page->banner->heading}}</h3>
             <p style="text-align: justify;">
               Dalton Flooring Gallery is where all floor services are available at economical rates. The company has been assisting clients with top-class services for a long time. It has a long list of happy clients because customer-friendly policies are offered. Skilled professionals are available to lay the carpet on the ground efficiently. They always do their job the best and deliver the desired results. Moreover, the experts are matchless regarding hardwood floor installation.
             </p>
