@@ -189,7 +189,7 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-grid"></i> Services</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="services_check" checked><span
+                                    <label class="switch"><input type="checkbox" name="service_check" checked><span
                                             class="slider round"></span></label>
                                 </div>
 
@@ -258,7 +258,7 @@
                                 <div class="add-listing-headline">
                                     <h3><i class="sl sl-icon-grid"></i>Testimonials</h3>
                                     <!-- Switcher -->
-                                    <label class="switch"><input type="checkbox" name="testimonials_check" checked><span
+                                    <label class="switch"><input type="checkbox" name="testimonial_check" checked><span
                                             class="slider round"></span></label>
                                 </div>
 

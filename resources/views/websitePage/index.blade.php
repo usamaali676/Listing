@@ -4,7 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
-  <title>Hardwood Flooring Installation</title>
+  <title>{{ $land_page->title }}</title>
   <meta name="description" content="">
   <meta name="keywords" content="">
 
@@ -40,6 +40,14 @@
     :root{
         --accent-color
     }
+    .header .logo img{
+        width: 230px;
+        height: 80px;
+        object-fit: contain;
+        margin-right: 20px;
+        transition: filter 0.3s ease-in-out;
+        max-height: 100%
+    }
   </style>
 
 </head>
@@ -49,10 +57,15 @@
   <header id="header" class="header d-flex align-items-center fixed-top">
     <div class="container-fluid container-xl position-relative d-flex align-items-center justify-content-between">
 
-      <a href="index.html" class="logo d-flex align-items-center">
+      <a href="#hero" class="logo d-flex align-items-center">
         <!-- Uncomment the line below if you also wish to use an image logo -->
         <!-- <img src="assets/img/logo.png" alt=""> -->
-        <h1 class="sitename">Dalton Flooring</h1>
+        {{-- <h1 class="sitename">Dalton Flooring</h1> --}}
+        @if(isset($land_page->logo))
+            <img class="landing_logo" src="{{ asset('landingpage/logo') }}/{{ $land_page->logo }}" alt="">
+        @else
+            <img class="landing_logo" src="{{ asset('business/logo') }}/{{ $land_page->business->logo }}" alt="">
+        @endif
       </a>
 
       <nav id="navmenu" class="navmenu">
@@ -75,10 +88,12 @@
     <!-- Hero Section -->
     <section id="hero" class="hero section accent-background">
 
-      <img src="imges/backgorund.webp" width="100%" alt="" data-aos="fade-in">
+        <img id="banner-image" src="" width="100%" alt="" data-aos="fade-in">
+
+      {{-- <img src="{{ asset('landingpage/desk_banner') }}/{{ $land_page->banner->desktop_image }}" width="100%" alt="" data-aos="fade-in"> --}}
 
       <div class="container text-center" data-aos="fade-up" data-aos-delay="100">
-        <h2>Hardwood Flooring Installation in Atlanta, GA</h2>
+        <h2 @if(isset($land_page->banner->heading_color)) style="color: {{ $land_page->banner->heading_color }}" @else class="theme-color" @endif>{{ $land_page->banner->heading }}</h2>
         <p>Dalton Flooring Gallery</p>
         <a href="#about" class="btn-scroll" title="Scroll Down"><i class="bi bi-chevron-down"></i></a>
       </div>
@@ -270,32 +285,23 @@
         <div class="isotope-layout" data-default-filter="*" data-layout="masonry" data-sort="original-order">
           <div class="row gy-4 isotope-container" data-aos="fade-up" data-aos-delay="200">
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
-              <img src="imges/1722448731_Hardwood flooring installation.webp" width="416" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <a href="imges/1722448731_Hardwood flooring installation.webp" title="" data-gallery="portfolio-gallery" class="glightbox preview-link">
-                  <i class="bi bi-zoom-in"></i>
-                </a>
-              </div>
-            </div><!-- End Portfolio Item -->
+            {{-- @php
+                dd($land_page);
+            @endphp --}}
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-product">
-              <img src="imges/1722448731_Hardwood flooring installation2.webp" width="416" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <a href="imges/1722448731_Hardwood flooring installation2.webp" title="" data-gallery="portfolio-gallery" class="glightbox preview-link">
-                  <i class="bi bi-zoom-in"></i>
-                </a>
-              </div>
-            </div><!-- End Portfolio Item -->
+            @if(isset($land_page->gallery) && count($land_page->gallery) > 0)
+                @foreach($land_page->gallery as $gallery_item)
+                    <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-app">
+                        <img src="{{ asset('/landingpage/gallery') }}/{{ $gallery_item->image }}" width="416" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                        <a href="{{ asset('/landingpage/gallery') }}/{{ $gallery_item->image }}" title="" data-gallery="portfolio-gallery" class="glightbox preview-link">
+                            <i class="bi bi-zoom-in"></i>
+                        </a>
+                        </div>
+                    </div><!-- End Portfolio Item -->
+                @endforeach
+            @endif
 
-            <div class="col-lg-4 col-md-6 portfolio-item isotope-item filter-branding">
-              <img src="imges/1722448731_Hardwood flooring installation_1_11zon.webp" width="416" height="312px" class="img-fluid" alt="">
-              <div class="portfolio-info">
-                <a href="imges/1722448731_Hardwood flooring installation_1_11zon.webp" title="" data-gallery="portfolio-gallery" class="glightbox preview-link">
-                  <i class="bi bi-zoom-in"></i>
-                </a>
-              </div>
-            </div><!-- End Portfolio Item -->
 
           </div><!-- End Portfolio Container -->
         </div>
@@ -562,7 +568,7 @@
       <div class="credits">
         Designed by <a href="https://firmtechservices.com/">FTS</a>
       </div>
-    </div>asset
+    </div>
 
   </footer>
 
@@ -582,9 +588,35 @@
   <script src=" {{asset('assest/landingpage/isotope-layout/isotope.pkgd.min.js')}}"></script>
   <script src="{{asset('assets/landingpage/swiper/swiper-bundle.min.css')}}"></script>
 
-
   <!-- Main JS File -->
   <script src="{{asset('assets/landingpage/js/main.js')}}"></script>
+
+  <script>
+    // Function to change the image based on screen size
+    function updateBannerImage() {
+        var screenWidth = window.innerWidth;
+        var desktopImage = "{{ asset('landingpage/desk_banner') }}/{{ $land_page->banner->desktop_image }}";
+        var mobileImage = "{{ asset('landingpage/mob_banner') }}/{{ $land_page->banner->mobile_image }}";
+
+        var imageElement = document.getElementById("banner-image");
+
+        // Check the screen width and set the appropriate image source
+        if (screenWidth > 600) {
+            imageElement.src = desktopImage;
+        } else {
+            imageElement.src = mobileImage;
+        }
+    }
+
+    // Run the function on page load
+    window.addEventListener('load', updateBannerImage);
+
+    // Run the function whenever the window is resized
+    window.addEventListener('resize', updateBannerImage);
+</script>
+
+<!-- Image element that will be dynamically changed -->
+
 
 </body>
 

@@ -56,7 +56,7 @@ class LandingPageController extends Controller
         //     dd("sdfjhsdkjf");
         // }
 
-        // dd($request->all());
+
         $request->validate([
             'title' => 'required',
             'slug' => 'required | unique:landing_pages,slug',
@@ -101,11 +101,12 @@ class LandingPageController extends Controller
             'status' => $request->status? 1 : 0,
 
         ]);
-        $landingPage_id = $landingPage->id ;
+        $landingPage_id = 1 ;
 
-        // dd($landingPage_id);
+        // dd($request->service_check);
 
-        if(count($request->service_title) > 0 && $request->service_check == true) {
+        if($request->service_check == true && count($request->service_title) > 0) {
+            // dd($request->service_title);
 
             foreach ($request->service_title as $key=>$title) {
                 // dd($key, $request->service_description);
@@ -117,6 +118,8 @@ class LandingPageController extends Controller
                 }
             }
         }
+        // dd($service);
+        // dd($request->all());
 
         if($request->feature_check == true && count($request->feature_title) > 0) {
             // $service
@@ -130,7 +133,7 @@ class LandingPageController extends Controller
             }
         }
 
-        if($request->testimonial_check == true && count($request->testimonial_title) > 0) {
+        if($request->testimonial_check == true && isset($request->testimonial_title)) {
             // $testimonial
             foreach ($request->testimonial_title as $key=>$title) {
                 if(isset($title)) {
