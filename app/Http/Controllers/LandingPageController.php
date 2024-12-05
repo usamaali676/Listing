@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Helpers\GlobalHelper;
+use App\Mail\LandingPageMail;
 use App\Models\BannerLandPage;
 use App\Models\Business;
 use App\Models\FeaturesLandPage;
@@ -11,6 +12,7 @@ use App\Models\LandingPage;
 use App\Models\ServiceLandPage;
 use App\Models\TestimonialsLandPage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use RealRashid\SweetAlert\Facades\Alert;
 
 class LandingPageController extends Controller
@@ -60,6 +62,7 @@ class LandingPageController extends Controller
         $request->validate([
             'title' => 'required',
             'slug' => 'required | unique:landing_pages,slug',
+            'business_id' => 'required',
         ]);
         $businessId = Business::where('id', $request->business_id)->pluck('lp_id')->first();
         // dd($businessId);
@@ -348,7 +351,6 @@ class LandingPageController extends Controller
 
         Alert::success('Success', "LandingPage Updated Successfully");
        return redirect()->route('landingpage.index');
-       return redirect()->route('landingpage.index');
 
 
 
@@ -400,8 +402,79 @@ class LandingPageController extends Controller
      * @param  \App\Models\LandingPage  $landingPage
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LandingPage $landingPage)
+    public function destroy($id)
     {
-        //
+        $landingPage = LandingPage::find($id);
+
+        if($landingPage->logo != "") {
+            GlobalHelper::delete_landpage_img($landingPage->logo, 'logo');
+        }
+        $landingPage->service()->delete();
+        $landingPage->features()->delete();
+        $landingPage->testimonial()->delete();
+        if(isset($landingPage->banner)) {
+            foreach($landingPage->banner as $banner){
+                GlobalHelper::delete_landpage_img($banner->desktop_image, 'desk_banner');
+                GlobalHelper::delete_landpage_img($banner->mobile_image,'mob_banner');
+            }
+        }
+        if(count($landingPage->gallery) > 0){
+            foreach($landingPage->gallery as $gallery){
+                GlobalHelper::delete_landpage_img($gallery->image, 'gallery');
+            }
+        }
+        $landingPage->delete();
+        Alert::success('Success', "LandingPage Deleted Successfully");
+        return redirect()->route('landingpage.index');
+    }
+    public function form(Request $request)
+    {
+        try {
+            $data = $this->validate($request,[
+                'name'=>'required',
+                'email'=>'required',
+                'subject'=>'required',
+                'message'=>'required',
+                'slug'=> 'required',
+            ]);
+
+
+
+            $landPage = LandingPage::where('id',$request->email_id)->first();
+            // dd($landPage);
+
+            if(isset($landPage->email))
+            {
+                $email = $landPage->email;
+                // dd($email);
+
+                // if (Str::endsWith($email, '@gmail.com')) {
+                //     // The email is a Gmail address
+                //     dd("This is a Gmail address.");
+                // } else {
+                //     // The email is not a Gmail address
+                //     dd("This is not a Gmail address.");
+                // }
+                Mail::to($email)->send(new LandingPageMail($data));
+                Mail::to('daniel@firmtechsol.com')->send(new LandingPageMail($data));
+                Alert::success('Success', "Your Message has been Sent");
+                return redirect()->back();
+            }
+            else{
+
+                $business = Business::where('id',$request->business_id)->first();
+                $clientEmail = $business->email;
+                dd($clientEmail);
+                Mail::to($clientEmail)->send(new LandingPageMail($data));
+                Mail::to('daniel@firmtechsol.com')->send(new LandingPageMail($data));
+                Alert::success('Success', "Your Message has been Sent");
+                return redirect()->back();
+
+            }
+        } catch (\Exception $e) {
+            Alert::error('Error', $e->getMessage());
+            return redirect()->back();
+        }
+
     }
 }

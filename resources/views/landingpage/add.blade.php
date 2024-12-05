@@ -430,24 +430,28 @@
                                     <!-- Headline -->
                                     <div class="add-listing-headline">
                                         <h3><i class="sl sl-icon-doc"></i> About</h3>
+
+                                        <label class="switch"><input type="checkbox" name="about_check" checked><span
+                                            class="slider round"></span></label>
                                     </div>
 
 
 
+                                    <div class="switcher-content">
+                                        <!-- Row -->
+                                        <div class="row with-forms">
+                                            <!-- Slug -->
+                                            <div class="col-md-12">
+                                                <h5>Title</h5>
+                                                <input class="search-field" type="text" name="about_heading"   />
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h5>Description</h5>
+                                                <textarea class="ckeditor" id="editor1" rows="5" name="about_description" cols="80">
+                                                                            </textarea>
+                                            </div>
 
-                                    <!-- Row -->
-                                    <div class="row with-forms">
-                                        <!-- Slug -->
-                                        <div class="col-md-12">
-                                            <h5>Title 1</h5>
-                                            <input class="search-field" type="text" name="about_heading"   />
                                         </div>
-                                        <div class="col-md-12">
-                                            <h5>Description</h5>
-                                            <textarea class="ckeditor" id="editor1" rows="5" name="about_description" cols="80">
-                                                                        </textarea>
-                                        </div>
-
                                     </div>
                                     <!-- Section / End -->
                                 </div>

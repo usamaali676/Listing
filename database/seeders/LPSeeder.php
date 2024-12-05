@@ -14,12 +14,20 @@ class LPSeeder extends Seeder
      */
     public function run()
     {
-        $business = Business::all();
-        $sr = 100;
-        foreach ($business as $item) {
-            $item->update([
-                'lp_id' => $sr++,
-            ]);
-        }
+        $count = 100;
+
+        // Retrieve all the businesses in ascending order by ID
+        Business::orderBy('id')->chunk(100, function ($businesses) use (&$count) {
+            // Loop through each business
+            foreach ($businesses as $business) {
+                // Update the specific column
+                $business->update([
+                    'lp_id' => $count,  // replace 'your_column_name' with the actual column name
+                ]);
+
+                // Increment the counter
+                $count++;
+            }
+        });
     }
 }

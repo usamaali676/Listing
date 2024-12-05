@@ -291,6 +291,47 @@
                                                 </div>
                                             </div>
 
+                                            @if ($Activeuser->status == 1)
+                                            <!-- Email Address -->
+                                            <div class="col-md-4">
+                                                <h5 class="gplus-input"><i class="fa fa-eyedropper" aria-hidden="true"></i> Theme Color
+                                                    <span>(Requierd)</span></h5>
+                                                <input type="text" value="{{ $business->theme_color }}" placeholder="#ff0000" name="theme_color">
+                                            </div>
+                                            @endif
+
+                                            @if ($Activeuser->status == 1)
+                                            <!-- Email Address -->
+                                            <div class="col-md-12">
+                                                <h5 class="gplus-input"><i class="fa fa-video-camera" aria-hidden="true"></i> Video
+                                                    <span>(Optional)</span></h5>
+                                                <input type="text" placeholder="Embed Video URL" value="{{ $business->video_link }}" name="video_link">
+                                            </div>
+
+                                            <div class="col-md-4">
+                                                <h5 class="gplus-input"><i class="fa fa-google" aria-hidden="true"></i> Google Review Check
+                                                    <span>(Optional)</span></h5>
+                                                <div class="check-input">
+                                                  <input type="checkbox" name="g_review_check"  @if($business->g_review_check ==  true)checked @endif >
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5 class="gplus-input"><i class="fa fa-google" aria-hidden="true"></i> Google Review Link
+                                                    <span>(Optional)</span></h5>
+                                                <div class="check-input">
+                                                  <input type="text" name="g_review_slug" value="{{ $business->g_review_slug }}" placeholder="Google Review Link">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-4">
+                                                <h5 class="fb-input"><i class="fa-solid fa-page" aria-hidden="true"></i>Landing Page ID
+                                                    <span>(Requierd)</span></h5>
+                                                <div class="check-input">
+                                                  <input type="number" name="lp_id" @if(isset($business->lp_id))  value="{{ $business->lp_id }}" @else value="{{ $lp_id +1 }}" min="{{ $lp_id +1 }}" @endif >
+                                                </div>
+                                            </div>
+
+                                            @endif
+
                                         </div>
                                         <!-- Row / End -->
 

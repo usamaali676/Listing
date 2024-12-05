@@ -293,6 +293,29 @@ $user = Auth::user();
                                 <span>(Optional)</span></h5>
                             <input type="text" placeholder="Embed Video URL" name="video_link">
                         </div>
+
+                        <div class="col-md-4">
+                            <h5 class="gplus-input"><i class="fa fa-google" aria-hidden="true"></i> Google Review Check
+                                <span>(Optional)</span></h5>
+                            <div class="check-input">
+                              <input type="checkbox" name="g_review_check" checked>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="gplus-input"><i class="fa fa-google" aria-hidden="true"></i> Google Review Link
+                                <span>(Optional)</span></h5>
+                            <div class="check-input">
+                              <input type="text" name="g_review_slug" placeholder="Google Review Link">
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <h5 class="fb-input"><i class="fa-solid fa-page" aria-hidden="true"></i>Landing Page ID
+                                <span>(Requierd)</span></h5>
+                            <div class="check-input">
+                              <input type="number" name="lp_id" value="{{ $lp_id +1 }}" min="{{ $lp_id +1 }}">
+                            </div>
+                        </div>
+
                         @endif
 
                     </div>

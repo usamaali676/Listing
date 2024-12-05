@@ -128,6 +128,7 @@ Route::controller(RoleController::class)->prefix('role')->as('role.')->middlewar
         Route::get('/logo-del',  'logo_del')->name('logo-del');
         Route::get('/deletebanner',  'deletebanner')->name('deletebanner');
         Route::get('/bannermob',  'bannermob')->name('bannermob');
+        Route::post('/submit', 'form')->name('form_submit');
 
 
     });

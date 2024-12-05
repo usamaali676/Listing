@@ -8,6 +8,7 @@ use App\Models\BusinessCategory;
 use App\Models\AreaWeServe;
 use App\Models\OpeningHours;
 use App\Models\BusinessGallery;
+use App\Models\LandingPage;
 use App\Models\State;
 use App\Models\Tags;
 use Carbon\Carbon;
@@ -78,6 +79,8 @@ class BusinessController extends Controller
     {
         $user = Auth::user();
         $business = Business::where('user_id', $user->id)->get();
+        $lp_id = Business::orderBy('id', 'desc')->pluck('lp_id')->first();
+        // dd($lp_id);
         if($user->status == 0){
             if($business->count() >= 1) {
             Alert::error('Error', "You Reached Maximum Free Listing Limit");
@@ -92,7 +95,7 @@ class BusinessController extends Controller
         else {
             $bcat = BusinessCategory::all();
             $state = State::all();
-            return view('business.add', compact('bcat', 'state'));
+            return view('business.add', compact('bcat', 'state', 'lp_id'));
         }
 
     }
@@ -118,6 +121,7 @@ class BusinessController extends Controller
             'email' => 'required',
             'logo' => 'required',
             'feature' => 'required',
+            'lp_id' => 'required |unique:business',
             // 'meta_title' => 'required',
             // 'meta_keyword' => 'required',
             // 'meta_description' => 'required'
@@ -157,6 +161,8 @@ class BusinessController extends Controller
         $business->theme_color = $request->theme_color;
         $business->g_review_check = $request->g_review_check;
         $business->g_review_slug = $request->g_review_slug;
+        $business->lp_id = $request->lp_id;
+
         if($user->status == 1){
             $business->status = 1;
         }
@@ -258,7 +264,8 @@ class BusinessController extends Controller
         $bcat = BusinessCategory::all();
         // $selectedstate = State::where('id', $business->areas->state_id)->first();
         $states = State::all();
-        return view('business.edit', compact('business', 'bcat', 'category', 'states'));
+        $lp_id = Business::orderBy('id', 'desc')->pluck('lp_id')->first();
+        return view('business.edit', compact('business', 'bcat', 'category', 'states', 'lp_id'));
     }
 
     /**
@@ -271,9 +278,10 @@ class BusinessController extends Controller
     public function update(Request $request, $id)
     {
 
-
+        // dd($request->all());
         $request->validate([
             'slug' => 'required|unique:businesses,slug,'.$id,
+            'lp_id' => 'required|unique:businesses,lp_id,'.$id,
             'name'=> 'required',
             'description' => 'required',
             'phone' => 'required',
@@ -303,6 +311,11 @@ class BusinessController extends Controller
         $input['meta_title'] = $request->meta_title;
         $input['meta_keywords'] = $request->meta_keyword;
         $input['meta_description'] = $request->meta_description;
+        $input['video_link'] = $request->video_link;
+        $input['theme_color'] = $request->theme_color;
+        $input['g_review_check'] = $request->g_review_check ? 1 : 0 ?? 0;
+        $input['g_review_slug'] = $request->g_review_slug;
+        $input['lp_id'] = $request->lp_id;
 
         if($request->hasFile('logo'))
         {

@@ -10,6 +10,9 @@ class Business extends Model
 {
     use HasFactory;
 
+    protected $fillable = ['name','description','phone','address','email','website','sms','fb','inst','gmb','whatsapp','youtube','yelp','status','map','logo','featureImage','slug','timing_status','area_status','longitude','latitude','meta_title','meta_keywords','meta_description','user_id','video_link','theme_color','g_review_check','g_review_slug','lp_id'];
+
+
  /**
          * The roles that belong to the Business
          *
@@ -46,5 +49,8 @@ class Business extends Model
         public function averageRating()
         {
             return $this->reviews()->avg('stars');
+        }
+        public function landingpage() {
+            return $this->hasMany(LandingPage::class, 'business_id');
         }
 }

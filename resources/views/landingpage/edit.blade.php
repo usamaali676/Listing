@@ -463,25 +463,30 @@
                                     <!-- Headline -->
                                     <div class="add-listing-headline">
                                         <h3><i class="sl sl-icon-doc"></i> About</h3>
+
+                                        <label class="switch"><input type="checkbox" name="about_check" @if($land_page->about_check == 1 ) checked @endif value="{{ $land_page->about_check }}"><span
+                                            class="slider round"></span></label>
                                     </div>
 
 
 
 
-                                    <!-- Row -->
-                                    <div class="row with-forms">
-                                        <!-- Slug -->
-                                        <div class="col-md-12">
-                                            <h5>Title 1</h5>
-                                            <input class="search-field" type="text" name="about_heading" value="{{ $about->about_heading}}"  />
-                                        </div>
-                                        <div class="col-md-12">
-                                            <h5>Description</h5>
-                                            <textarea class="ckeditor"  id="editor1" rows="5" name="about_description" cols="80">
-                                                {{$about->about_description}}
-                                                                        </textarea>
-                                        </div>
+                                    <div class="switcher-content">
+                                        <!-- Row -->
+                                        <div class="row with-forms">
+                                            <!-- Slug -->
+                                            <div class="col-md-12">
+                                                <h5>Title 1</h5>
+                                                <input class="search-field" type="text" name="about_heading" value="{{ $about->about_heading}}"  />
+                                            </div>
+                                            <div class="col-md-12">
+                                                <h5>Description</h5>
+                                                <textarea class="ckeditor"  id="editor1" rows="5" name="about_description" cols="80">
+                                                    {{$about->about_description}}
+                                                                            </textarea>
+                                            </div>
 
+                                        </div>
                                     </div>
                                     <!-- Section / End -->
                                 </div>
